@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Kuis Ceria - Kelas 4 SD</title>
+    <title>Menu Utama - Kuis Seru Kelas 4 SD</title>
     <style>
         :root {
             --primary: #4f46e5;
             --primary-hover: #4338ca;
-            --secondary: #0ea5e9;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --border-color: #e2e8f0;
-            --success: #16a34a;
-            --error: #dc2626;
+            --accent-math: #0ea5e9;
+            --accent-ipas: #10b981;
+            --accent-indo: #f59e0b;
         }
 
         body {
@@ -31,394 +31,108 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             background: var(--card-bg);
             padding: 30px;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: var(--primary);
             margin-bottom: 10px;
-            font-size: 24px;
+            font-size: 26px;
         }
 
         .subtitle {
-            text-align: center;
             color: #64748b;
-            font-size: 14px;
-            margin-bottom: 25px;
+            font-size: 15px;
+            margin-bottom: 30px;
         }
 
-        /* Menu Utama Styles */
-        .menu-container {
-            text-align: center;
-        }
-
-        .menu-grid {
-            display: grid;
+        .menu-list {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            margin-top: 20px;
         }
 
+        /* Tombol menu berbasis tag <a> (link HTML murni) */
         .menu-btn {
-            background: #f1f5f9;
-            border: 2px solid var(--border-color);
-            padding: 18px 20px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: #f1f5f9;
+            border: 2px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 17px;
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
 
         .menu-btn:hover {
-            background: #e0e7ff;
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Quiz Screen Styles */
-        .quiz-screen, .result-container {
-            display: none;
-        }
-
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #64748b;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .question-box {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .options-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 25px 0;
-        }
-
-        .option-item {
-            background: #f1f5f9;
-            border: 2px solid var(--border-color);
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 16px;
-        }
-
-        .option-item:hover:not(.disabled) {
             background: #e2e8f0;
             border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
-        .option-item.correct {
-            background: #dcfce7;
-            border-color: var(--success);
-            color: var(--success);
-            font-weight: 600;
+        .menu-btn.math {
+            border-left: 6px solid var(--accent-math);
         }
 
-        .option-item.incorrect {
-            background: #fee2e2;
-            border-color: var(--error);
-            color: var(--error);
-            font-weight: 600;
+        .menu-btn.ipas {
+            border-left: 6px solid var(--accent-ipas);
         }
 
-        .option-item.disabled {
-            cursor: default;
+        .menu-btn.indo {
+            border-left: 6px solid var(--accent-indo);
         }
 
-        .explanation {
-            background: #f8fafc;
-            border-left: 4px solid var(--primary);
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-            font-size: 15px;
-            display: none;
+        .icon {
+            font-size: 20px;
         }
 
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            width: 100%;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background: var(--primary-hover);
-        }
-
-        .btn:disabled {
-            background: #cbd5e1;
-            cursor: not-allowed;
-        }
-
-        .btn-secondary {
-            background: #64748b;
-        }
-        .btn-secondary:hover {
-            background: #475569;
-        }
-
-        .result-container {
-            text-align: center;
-        }
-
-        .score-display {
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 20px 0;
-        }
-
-        .result-message {
-            font-size: 18px;
-            margin-bottom: 25px;
-            color: #475569;
+        .footer-note {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        
-        <!-- 1. MENU UTAMA -->
-        <div id="main-menu" class="menu-container">
-            <h1>🌟 Portal Kuis Ceria 🌟</h1>
-            <div class="subtitle">Pilih mata pelajaran untuk mulai berlatih, khusus siswa Kelas 4 SD!</div>
-            
-            <div class="menu-grid">
-                <button class="menu-btn" onclick="startQuiz('math')">
-                    <span>📐 Kuis Matematika</span>
-                    <span>➔</span>
-                </button>
-                <button class="menu-btn" onclick="startQuiz('ipas')">
-                    <span>🌱 Kuis IPAS (Sains)</span>
-                    <span>➔</span>
-                </button>
-            </div>
+        <h1>Pusat Kuis Kelas 4 SD</h1>
+        <p class="subtitle">Pilih mata pelajaran di bawah ini untuk mulai berlatih!</p>
+
+        <div class="menu-list">
+            <!-- Link ke Kuis Matematika -->
+            <a href="https://htmlpreview.github.io/?https://github.com/ujisama2/kuis-matematika/blob/main/kuis_matematika_kelas_4_sd_membaca_menulis_bilangan_cacah.html" class="menu-btn math">
+                <span>📐 Kuis Matematika</span>
+                <span class="icon">➔</span>
+            </a>
+
+            <!-- Link ke Kuis IPAS -->
+            <a href="kuis_ipas.html" class="menu-btn ipas">
+                <span>🌱 Kuis IPAS</span>
+                <span class="icon">➔</span>
+            </a>
+
+            <!-- Link ke Kuis Bahasa Indonesia -->
+            <a href="kuis_bahasa.html" class="menu-btn indo">
+                <span>📚 Kuis Bahasa Indonesia</span>
+                <span class="icon">➔</span>
+            </a>
         </div>
 
-        <!-- 2. LAYAR KUIS -->
-        <div id="quiz-screen" class="quiz-screen">
-            <div class="quiz-header">
-                <span id="question-tracker">Soal 1 dari 5</span>
-                <span id="score-tracker">Skor: 0</span>
-            </div>
-
-            <div class="question-box" id="question-text">
-                Pertanyaan akan muncul di sini...
-            </div>
-
-            <ul class="options-list" id="options-list">
-                <!-- Opsi jawaban dimuat lewat JavaScript -->
-            </ul>
-
-            <div class="explanation" id="explanation-box">
-                <strong>Penjelasan:</strong> <span id="explanation-text"></span>
-            </div>
-
-            <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Lanjut ke Soal Berikutnya</button>
-            <button class="btn btn-secondary" onclick="backToMenu()">Kembali ke Menu Utama</button>
+        <div class="footer-note">
+            Silakan pastikan nama file HTML kuis di folder Anda sudah sesuai dengan link di atas.
         </div>
-
-        <!-- 3. LAYAR HASIL SELESAI -->
-        <div id="result-container" class="result-container">
-            <h2>Kuis Selesai! 🎉</h2>
-            <div class="score-display" id="final-score">0 / 100</div>
-            <div class="result-message" id="result-message">Kerja bagus! Teruslah berlatih ya.</div>
-            <button class="btn" onclick="backToMenu()">Pilih Kuis Lain</button>
-        </div>
-
     </div>
 
-    <script>
-        // Database Kuis Berdasarkan Kategori
-        const allQuizzes = {
-            math: [
-                {
-                    question: "Bentuk pecahan yang senilai dengan 2/3 adalah...",
-                    options: ["4/9", "6/9", "3/6", "5/8"],
-                    answer: 1,
-                    explanation: "Pecahan senilai dicari dengan mengalikan pembilang dan penyebut dengan angka yang sama (2/3 × 3 = 6/9)."
-                },
-                {
-                    question: "Hasil dari operasi hitung 120 + 40 × 2 - 50 adalah...",
-                    options: ["150", "270", "110", "200"],
-                    answer: 0,
-                    explanation: "Kerjakan perkalian dulu: 40 × 2 = 80. Lalu 120 + 80 - 50 = 150."
-                },
-                {
-                    question: "Sebuah lapangan berbentuk persegi panjang memiliki panjang 15 m dan lebar 8 m. Berapa luasnya?",
-                    options: ["46 meter", "120 meter persegi", "100 meter persegi", "23 meter persegi"],
-                    answer: 1,
-                    explanation: "Rumus luas persegi panjang adalah Panjang × Lebar (15 m × 8 m = 120 m²)."
-                }
-            ],
-            ipas: [
-                {
-                    question: "Bagian tumbuhan yang berfungsi untuk menyerap air dan zat hara dari dalam tanah adalah...",
-                    options: ["Daun", "Batang", "Akar", "Bunga"],
-                    answer: 2,
-                    explanation: "Akar berada di dalam tanah dan bertugas menyerap air serta mineral yang dibutuhkan tumbuhan."
-                },
-                {
-                    question: "Wujud benda yang memiliki bentuk dan volume yang berubah-ubah mengikuti wadahnya adalah...",
-                    options: ["Benda padat", "Benda cair", "Benda gas", "Benda keras"],
-                    answer: 2,
-                    explanation: "Benda gas mengisi seluruh ruangan yang ditempatinya serta bentuk dan volumenya dapat berubah."
-                },
-                {
-                    question: "Contoh pemanfaatan gaya dorong dalam kehidupan sehari-hari adalah...",
-                    options: ["Menarik laci meja", "Membuka pintu dengan ditarik", "Menendang bola ke depan", "Mengangkat ember air"],
-                    answer: 2,
-                    explanation: "Menendang bola adalah contoh memberikan gaya dorong agar bola bergerak menjauh."
-                }
-            ]
-        };
-
-        let currentCategory = '';
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let answered = false;
-
-        const mainMenu = document.getElementById("main-menu");
-        const quizScreen = document.getElementById("quiz-screen");
-        const resultScreen = document.getElementById("result-container");
-        
-        const questionTracker = document.getElementById("question-tracker");
-        const scoreTracker = document.getElementById("score-tracker");
-        const questionText = document.getElementById("question-text");
-        const optionsList = document.getElementById("options-list");
-        const explanationBox = document.getElementById("explanation-box");
-        const explanationText = document.getElementById("explanation-text");
-        const nextBtn = document.getElementById("next-btn");
-        const finalScore = document.getElementById("final-score");
-        const resultMessage = document.getElementById("result-message");
-
-        function startQuiz(category) {
-            currentCategory = category;
-            currentQuestions = allQuizzes[category];
-            currentQuestionIndex = 0;
-            score = 0;
-
-            mainMenu.style.display = "none";
-            resultScreen.style.display = "none";
-            quizScreen.style.display = "block";
-            
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            answered = false;
-            nextBtn.disabled = true;
-            explanationBox.style.display = "none";
-
-            const currentData = currentQuestions[currentQuestionIndex];
-            questionTracker.innerText = `Soal ${currentQuestionIndex + 1} dari ${currentQuestions.length}`;
-            scoreTracker.innerText = `Skor: ${score}`;
-            questionText.innerText = currentData.question;
-
-            optionsList.innerHTML = "";
-            currentData.options.forEach((option, index) => {
-                const li = document.createElement("li");
-                li.className = "option-item";
-                li.innerText = option;
-                li.onclick = () => selectOption(index);
-                optionsList.appendChild(li);
-            });
-        }
-
-        function selectOption(selectedIndex) {
-            if (answered) return;
-            answered = true;
-
-            const currentData = currentQuestions[currentQuestionIndex];
-            const optionItems = optionsList.getElementsByClassName("option-item");
-            const pointsPerQuestion = 100 / currentQuestions.length;
-
-            if (selectedIndex === currentData.answer) {
-                optionItems[selectedIndex].classList.add("correct");
-                score += Math.round(pointsPerQuestion);
-                scoreTracker.innerText = `Skor: ${score}`;
-            } else {
-                optionItems[selectedIndex].classList.add("incorrect");
-                optionItems[currentData.answer].classList.add("correct");
-            }
-
-            for (let item of optionItems) {
-                item.classList.add("disabled");
-            }
-
-            explanationText.innerText = currentData.explanation;
-            explanationBox.style.display = "block";
-
-            nextBtn.disabled = false;
-            if (currentQuestionIndex === currentQuestions.length - 1) {
-                nextBtn.innerText = "Lihat Hasil Kuis";
-            } else {
-                nextBtn.innerText = "Lanjut ke Soal Berikutnya";
-            }
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < currentQuestions.length) {
-                loadQuestion();
-            } else {
-                showResult();
-            }
-        }
-
-        function showResult() {
-            quizScreen.style.display = "none";
-            resultScreen.style.display = "block";
-            finalScore.innerText = `${score} / 100`;
-
-            if (score >= 80) {
-                resultMessage.innerText = "Luar biasa! Kamu hebat sekali memahami materi ini! 🌟";
-            } else if (score >= 50) {
-                resultMessage.innerText = "Kerja bagus! Pertahankan semangat belajarnya ya! 👍";
-            } else {
-                resultMessage.innerText = "Jangan menyerah! Ayo ulangi lagi kuisnya untuk nilai lebih baik! 💪";
-            }
-        }
-
-        function backToMenu() {
-            quizScreen.style.display = "none";
-            resultScreen.style.display = "none";
-            mainMenu.style.display = "block";
-        }
-    </script>
 </body>
 </html>
