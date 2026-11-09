@@ -3,445 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Seru: Bilangan Cacah sampai 10.000 - Kelas 4 SD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Portal Kuis Ceria - Kelas 4 SD</title>
     <style>
         :root {
             --primary: #4f46e5;
             --primary-hover: #4338ca;
-            --secondary: #06b6d4;
-            --bg-color: #f0fdf4;
+            --secondary: #0ea5e9;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-color: #1f2937;
-            --success: #22c55e;
-            --error: #ef4444;
-            --warning: #f59e0b;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --success: #16a34a;
+            --error: #dc2626;
         }
 
         body {
-            background: linear-gradient(135deg, #e0f2fe 0%, #fef08a 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
             color: var(--text-color);
-            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 600px;
             background: var(--card-bg);
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 4px solid #bae6fd;
-        }
-
-        .header {
-            background: var(--primary);
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .header p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .content {
             padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Start Screen */
-        #start-screen {
+        h1 {
             text-align: center;
-            padding: 20px 0;
-        }
-
-        #start-screen h2 {
             color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-size: 24px;
         }
 
-        #start-screen p {
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
             margin-bottom: 25px;
-            color: #4b5563;
-            line-height: 1.6;
         }
 
-        .btn {
-            background-color: var(--success);
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            font-size: 1.1rem;
+        /* Menu Utama Styles */
+        .menu-container {
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-btn {
+            background: #f1f5f9;
+            border: 2px solid var(--border-color);
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: 600;
-            border-radius: 50px;
+            color: var(--text-color);
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .btn:hover {
+        .menu-btn:hover {
+            background: #e0e7ff;
+            border-color: var(--primary);
+            color: var(--primary);
             transform: translateY(-2px);
-            background-color: #16a34a;
         }
 
-        /* Quiz Screen */
-        .quiz-info {
+        /* Quiz Screen Styles */
+        .quiz-screen, .result-container {
+            display: none;
+        }
+
+        .quiz-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+            font-size: 14px;
             font-weight: 600;
-            color: #6b7280;
-            font-size: 0.9rem;
+            color: #64748b;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
         .question-box {
-            font-size: 1.15rem;
+            font-size: 18px;
             font-weight: 600;
-            color: #111827;
             margin-bottom: 20px;
             line-height: 1.5;
         }
 
-        .options-grid {
-            display: grid;
-            gap: 12px;
-            margin-bottom: 20px;
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
         }
 
-        .option-btn {
-            background-color: #f8fafc;
-            border: 2px solid #e2e8f0;
-            padding: 14px 18px;
-            text-align: left;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #334155;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            background-color: #f1f5f9;
-            border-color: var(--secondary);
-            color: var(--primary);
-        }
-
-        .option-btn.correct {
-            background-color: #dcfce7 !important;
-            border-color: var(--success) !important;
-            color: #166534 !important;
-        }
-
-        .option-btn.incorrect {
-            background-color: #fee2e2 !important;
-            border-color: var(--error) !important;
-            color: #991b1b !important;
-        }
-
-        /* Explanation Box */
-        .explanation-box {
-            background-color: #eff6ff;
-            border-left: 5px solid var(--secondary);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .explanation-box h4 {
-            color: #1e40af;
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        .explanation-box p {
-            color: #1e3a8a;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .next-btn-container {
-            text-align: right;
-            display: none;
-        }
-
-        /* Result Screen */
-        #result-screen {
-            text-align: center;
-            display: none;
-            padding: 20px 0;
-        }
-
-        #result-screen h2 {
-            font-size: 2rem;
-            color: var(--primary);
+        .option-item {
+            background: #f1f5f9;
+            border: 2px solid var(--border-color);
+            padding: 12px 16px;
             margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background: #e2e8f0;
+            border-color: var(--primary);
+        }
+
+        .option-item.correct {
+            background: #dcfce7;
+            border-color: var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .option-item.incorrect {
+            background: #fee2e2;
+            border-color: var(--error);
+            color: var(--error);
+            font-weight: 600;
+        }
+
+        .option-item.disabled {
+            cursor: default;
+        }
+
+        .explanation {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 15px;
+            display: none;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #64748b;
+        }
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .result-container {
+            text-align: center;
         }
 
         .score-display {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--warning);
-            margin: 15px 0;
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
         }
 
         .result-message {
-            font-size: 1.1rem;
-            color: #4b5563;
+            font-size: 18px;
             margin-bottom: 25px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .content { padding: 20px; }
-            .header h1 { font-size: 1.25rem; }
+            color: #475569;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="header">
-            <h1>Kuis Matematika Ceria 🎒</h1>
-            <p>Membaca dan Menulis Bilangan Cacah sampai 10.000 (Kelas 4 SD)</p>
-        </div>
-
-        <div class="content">
-            <!-- Start Screen -->
-            <div id="start-screen">
-                <h2>Halo, Pahlawan Matematika! 👋</h2>
-                <p>Uji kemampuanmu membaca, menulis, dan memahami nilai tempat bilangan cacah sampai 10.000 melalui 20 soal seru ini. Siap? Ayo mulai!</p>
-                <button class="btn" onclick="startQuiz()">Mulai Kuis Sekarang!</button>
-            </div>
-
-            <!-- Quiz Screen -->
-            <div id="quiz-screen" style="display: none;">
-                <div class="quiz-info">
-                    <span id="question-counter">Soal 1 dari 20</span>
-                    <span id="score-tracker">Skor: 0</span>
-                </div>
-
-                <div class="question-box" id="question-text">
-                    Pertanyaan akan muncul di sini...
-                </div>
-
-                <div class="options-grid" id="options-container">
-                    <!-- Opsi pilihan ganda dimuat lewat JavaScript -->
-                </div>
-
-                <div class="explanation-box" id="explanation-box">
-                    <h4>💡 Pembahasan:</h4>
-                    <p id="explanation-text">Penjelasan soal akan tampil di sini.</p>
-                </div>
-
-                <div class="next-btn-container" id="next-btn-container">
-                    <button class="btn" id="next-btn" onclick="nextQuestion()">Soal Berikutnya ➡️</button>
-                </div>
-            </div>
-
-            <!-- Result Screen -->
-            <div id="result-screen">
-                <h2>Hore, Kuis Selesai! 🎉</h2>
-                <p class="result-message">Kamu telah menyelesaikan seluruh tantangan bilangan cacah.</p>
-                <div class="score-display" id="final-score">0/20</div>
-                <p id="final-remark" style="font-weight: 600; margin-bottom: 25px; color: #374151;"></p>
-                <button class="btn" onclick="restartQuiz()">Coba Lagi 🔄</button>
+        
+        <!-- 1. MENU UTAMA -->
+        <div id="main-menu" class="menu-container">
+            <h1>🌟 Portal Kuis Ceria 🌟</h1>
+            <div class="subtitle">Pilih mata pelajaran untuk mulai berlatih, khusus siswa Kelas 4 SD!</div>
+            
+            <div class="menu-grid">
+                <button class="menu-btn" onclick="startQuiz('math')">
+                    <span>📐 Kuis Matematika</span>
+                    <span>➔</span>
+                </button>
+                <button class="menu-btn" onclick="startQuiz('ipas')">
+                    <span>🌱 Kuis IPAS (Sains)</span>
+                    <span>➔</span>
+                </button>
             </div>
         </div>
+
+        <!-- 2. LAYAR KUIS -->
+        <div id="quiz-screen" class="quiz-screen">
+            <div class="quiz-header">
+                <span id="question-tracker">Soal 1 dari 5</span>
+                <span id="score-tracker">Skor: 0</span>
+            </div>
+
+            <div class="question-box" id="question-text">
+                Pertanyaan akan muncul di sini...
+            </div>
+
+            <ul class="options-list" id="options-list">
+                <!-- Opsi jawaban dimuat lewat JavaScript -->
+            </ul>
+
+            <div class="explanation" id="explanation-box">
+                <strong>Penjelasan:</strong> <span id="explanation-text"></span>
+            </div>
+
+            <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Lanjut ke Soal Berikutnya</button>
+            <button class="btn btn-secondary" onclick="backToMenu()">Kembali ke Menu Utama</button>
+        </div>
+
+        <!-- 3. LAYAR HASIL SELESAI -->
+        <div id="result-container" class="result-container">
+            <h2>Kuis Selesai! 🎉</h2>
+            <div class="score-display" id="final-score">0 / 100</div>
+            <div class="result-message" id="result-message">Kerja bagus! Teruslah berlatih ya.</div>
+            <button class="btn" onclick="backToMenu()">Pilih Kuis Lain</button>
+        </div>
+
     </div>
 
     <script>
-        const questions = [
-            {
-                q: "Lambang bilangan dari 'Empat ribu lima ratus dua puluh' adalah...",
-                options: ["A. 4.052", "B. 4.520", "C. 4.502", "D. 4.250"],
-                answer: 1,
-                explanation: "Empat ribu ditulis 4.000, lima ratus ditulis 500, dua puluh ditulis 20. Jika digabungkan menjadi 4.520."
-            },
-            {
-                q: "Cara membaca bilangan 7.305 yang benar adalah...",
-                options: ["A. Tujuh ribu tiga ratus lima", "B. Tujuh ribu tiga ratus lima puluh", "C. Tujuh ribu tiga puluh lima", "D. Tujuh ribu lima ratus tiga"],
-                answer: 0,
-                explanation: "Angka 7 di tempat ribuan (tujuh ribu), 3 di tempat ratusan (tiga ratus), 0 di tempat puluhan, dan 5 di tempat satuan (lima). Dibaca 'Tujuh ribu tiga ratus lima'."
-            },
-            {
-                q: "Pada bilangan 8.421, angka 4 menempati tempat...",
-                options: ["A. Ribuan", "B. Ratusan", "C. Puluhan", "D. Satuan"],
-                answer: 1,
-                explanation: "Nilai tempat dari kiri ke kanan: 8 (ribuan), 4 (ratusan), 2 (puluhan), 1 (satuan). Jadi, angka 4 menempati tempat ratusan."
-            },
-            {
-                q: "Nilai tempat angka 6 pada bilangan 6.192 adalah...",
-                options: ["A. 6", "B. 60", "C. 600", "D. 6.000"],
-                answer: 3,
-                explanation: "Angka 6 berada di posisi paling kiri (ribuan), sehingga nilainya adalah 6.000 (enam ribu)."
-            },
-            {
-                q: "Bilangan yang terdiri atas 5 ribuan, 3 ratusan, 0 puluhan, dan 7 satuan adalah...",
-                options: ["A. 5.370", "B. 5.037", "C. 5.307", "D. 5.730"],
-                answer: 2,
-                explanation: "Disusun sesuai nilai tempatnya: 5.000 + 300 + 0 + 7 = 5.307."
-            },
-            {
-                q: "Manakah cara membaca bilangan 9.012 yang tepat?",
-                options: ["A. Sembilan ribu dua belas", "B. Sembilan ribu seratus dua", "C. Sembilan ribu duaratus", "D. Sembilan ribu dua"],
-                answer: 0,
-                explanation: "Angka 9.012 dibaca 'Sembilan ribu dua belas' karena nilai puluhannya adalah 1 dan satuannya 2 (12 dibaca dua belas)."
-            },
-            {
-                q: "Lambang bilangan dari 'Tiga ribu delapan' adalah...",
-                options: ["A. 3.800", "B. 3.080", "C. 3.008", "D. 3.880"],
-                answer: 2,
-                explanation: "Tiga ribu = 3.000, ratusan dan puluhan tidak ada (0), delapan = 8. Ditulis menjadi 3.008."
-            },
-            {
-                q: "Pada bilangan 4.956, angka berapa yang menempati nilai tempat puluhan?",
-                options: ["A. 4", "B. 9", "C. 5", "D. 6"],
-                answer: 2,
-                explanation: "Pada 4.956: 4 = ribuan, 9 = ratusan, 5 = puluhan, 6 = satuan. Angka yang menempati puluhan adalah 5."
-            },
-            {
-                q: "Urutan bilangan 2.450, 2.150, 2.350, 2.250 dari yang terkecil ke terbesar adalah...",
-                options: ["A. 2.150, 2.250, 2.350, 2.450", "B. 2.450, 2.350, 2.250, 2.150", "C. 2.150, 2.350, 2.250, 2.450", "D. 2.250, 2.150, 2.350, 2.450"],
-                answer: 0,
-                explanation: "Dimulai dari ratusan terkecil: 2.150, lalu 2.250, 2.350, dan paling besar 2.450."
-            },
-            {
-                q: "Bilangan 'lima ribu empat ratus sembilan belas' ditulis...",
-                options: ["A. 5.491", "B. 5.419", "C. 5.914", "D. 5.149"],
-                answer: 1,
-                explanation: "Lima ribu (5.000) + empat ratus (400) + sembilan belas (19) = 5.419."
-            },
-            {
-                q: "Manakah bilangan yang lebih besar antara 6.782 dan 6.728?",
-                options: ["A. 6.782", "B. 6.728", "C. Keduanya sama besar", "D. Tidak dapat dibandingkan"],
-                answer: 0,
-                explanation: "Bandingkan angka pada tempat puluhan: 8 (pada 6.782) lebih besar daripada 2 (pada 6.728). Maka 6.782 > 6.728."
-            },
-            {
-                q: "Berapa nilai angka 3 pada bilangan 3.456?",
-                options: ["A. 3", "B. 30", "C. 300", "D. 3.000"],
-                answer: 3,
-                explanation: "Angka 3 berada pada posisi ribuan, sehingga nilainya adalah 3.000."
-            },
-            {
-                q: "Bentuk panjang dari bilangan 4.832 adalah...",
-                options: ["A. 4.000 + 800 + 30 + 2", "B. 4.000 + 80 + 300 + 2", "C. 400 + 800 + 30 + 2", "D. 4.000 + 8 + 3 + 2"],
-                answer: 0,
-                explanation: "Bentuk panjang diuraikan berdasarkan nilai tempatnya: 4 ribuan (4.000) + 8 ratusan (800) + 3 puluhan (30) + 2 satuan (2)."
-            },
-            {
-                q: "Bilangan yang terletak tepat di antara 3.450 dan 3.452 adalah...",
-                options: ["A. 3.449", "B. 3.451", "C. 3.453", "D. 3.455"],
-                answer: 1,
-                explanation: "Setelah 3.450 adalah 3.451, lalu 3.452. Bilangan di tengahnya adalah 3.451."
-            },
-            {
-                q: "Cara membaca bilangan 10.000 adalah...",
-                options: ["A. Seribu", "B. Sepuluh ribu", "C. Seratus ribu", "D. Satu juta"],
-                answer: 1,
-                explanation: "10.000 adalah sepuluh kali seribu, dibaca 'Sepuluh ribu'."
-            },
-            {
-                q: "Penulisan yang benar untuk bilangan 'Delapan ribu sembilan puluh' adalah...",
-                options: ["A. 8.900", "B. 8.090", "C. 8.009", "D. 8.990"],
-                answer: 1,
-                explanation: "Delapan ribu = 8.000, ratusan = 0, sembilan puluh = 90. Digabung menjadi 8.090."
-            },
-            {
-                q: "Pada bilangan 1.234, angka 2 bernilai...",
-                options: ["A. 2", "B. 20", "C. 200", "D. 2.000"],
-                answer: 2,
-                explanation: "Angka 2 menempati tempat ratusan, sehingga nilai angkanya adalah 200."
-            },
-            {
-                q: "Jika angka 7 pada bilangan 5.742 diubah menjadi angka 3, maka bilangan baru tersebut menjadi...",
-                options: ["A. 5.342", "B. 3.742", "C. 5.732", "D. 5.432"],
-                answer: 0,
-                explanation: "Angka 7 yang berada di tempat ratusan diganti angka 3, sehingga 5.742 berubah menjadi 5.342."
-            },
-            {
-                q: "Bilangan manakah yang nilainya paling kecil di bawah ini?",
-                options: ["A. 4.321", "B. 4.123", "C. 4.231", "D. 4.312"],
-                answer: 1,
-                explanation: "Semua bilangan berawal dari 4. ribuan. Bandingkan angka ratusannya: 3, 1, 2, 3. Yang terkecil adalah angka 1 (4.123)."
-            },
-            {
-                q: "Bilangan 'enam ribu tujuh ratus sembilan puluh delapan' ditulis sebagai...",
-                options: ["A. 6.987", "B. 6.798", "C. 6.897", "D. 6.789"],
-                answer: 1,
-                explanation: "Enam ribu (6.000) + tujuh ratus (700) + sembilan puluh delapan (98) = 6.798."
-            }
-        ];
+        // Database Kuis Berdasarkan Kategori
+        const allQuizzes = {
+            math: [
+                {
+                    question: "Bentuk pecahan yang senilai dengan 2/3 adalah...",
+                    options: ["4/9", "6/9", "3/6", "5/8"],
+                    answer: 1,
+                    explanation: "Pecahan senilai dicari dengan mengalikan pembilang dan penyebut dengan angka yang sama (2/3 × 3 = 6/9)."
+                },
+                {
+                    question: "Hasil dari operasi hitung 120 + 40 × 2 - 50 adalah...",
+                    options: ["150", "270", "110", "200"],
+                    answer: 0,
+                    explanation: "Kerjakan perkalian dulu: 40 × 2 = 80. Lalu 120 + 80 - 50 = 150."
+                },
+                {
+                    question: "Sebuah lapangan berbentuk persegi panjang memiliki panjang 15 m dan lebar 8 m. Berapa luasnya?",
+                    options: ["46 meter", "120 meter persegi", "100 meter persegi", "23 meter persegi"],
+                    answer: 1,
+                    explanation: "Rumus luas persegi panjang adalah Panjang × Lebar (15 m × 8 m = 120 m²)."
+                }
+            ],
+            ipas: [
+                {
+                    question: "Bagian tumbuhan yang berfungsi untuk menyerap air dan zat hara dari dalam tanah adalah...",
+                    options: ["Daun", "Batang", "Akar", "Bunga"],
+                    answer: 2,
+                    explanation: "Akar berada di dalam tanah dan bertugas menyerap air serta mineral yang dibutuhkan tumbuhan."
+                },
+                {
+                    question: "Wujud benda yang memiliki bentuk dan volume yang berubah-ubah mengikuti wadahnya adalah...",
+                    options: ["Benda padat", "Benda cair", "Benda gas", "Benda keras"],
+                    answer: 2,
+                    explanation: "Benda gas mengisi seluruh ruangan yang ditempatinya serta bentuk dan volumenya dapat berubah."
+                },
+                {
+                    question: "Contoh pemanfaatan gaya dorong dalam kehidupan sehari-hari adalah...",
+                    options: ["Menarik laci meja", "Membuka pintu dengan ditarik", "Menendang bola ke depan", "Mengangkat ember air"],
+                    answer: 2,
+                    explanation: "Menendang bola adalah contoh memberikan gaya dorong agar bola bergerak menjauh."
+                }
+            ]
+        };
 
-        let currentQuestion = 0;
+        let currentCategory = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
         let score = 0;
         let answered = false;
 
-        const startScreen = document.getElementById("start-screen");
+        const mainMenu = document.getElementById("main-menu");
         const quizScreen = document.getElementById("quiz-screen");
-        const resultScreen = document.getElementById("result-screen");
+        const resultScreen = document.getElementById("result-container");
         
-        const questionCounter = document.getElementById("question-counter");
+        const questionTracker = document.getElementById("question-tracker");
         const scoreTracker = document.getElementById("score-tracker");
         const questionText = document.getElementById("question-text");
-        const optionsContainer = document.getElementById("options-container");
+        const optionsList = document.getElementById("options-list");
         const explanationBox = document.getElementById("explanation-box");
         const explanationText = document.getElementById("explanation-text");
-        const nextBtnContainer = document.getElementById("next-btn-container");
         const nextBtn = document.getElementById("next-btn");
+        const finalScore = document.getElementById("final-score");
+        const resultMessage = document.getElementById("result-message");
 
-        function startQuiz() {
-            startScreen.style.display = "none";
-            quizScreen.style.display = "block";
-            currentQuestion = 0;
+        function startQuiz(category) {
+            currentCategory = category;
+            currentQuestions = allQuizzes[category];
+            currentQuestionIndex = 0;
             score = 0;
+
+            mainMenu.style.display = "none";
+            resultScreen.style.display = "none";
+            quizScreen.style.display = "block";
+            
             loadQuestion();
         }
 
         function loadQuestion() {
             answered = false;
+            nextBtn.disabled = true;
             explanationBox.style.display = "none";
-            nextBtnContainer.style.display = "none";
-            
-            const q = questions[currentQuestion];
-            questionCounter.textContent = `Soal ${currentQuestion + 1} dari ${questions.length}`;
-            scoreTracker.textContent = `Skor: ${score}`;
-            questionText.textContent = q.q;
 
-            optionsContainer.innerHTML = "";
-            q.options.forEach((opt, index) => {
-                const btn = document.createElement("button");
-                btn.className = "option-btn";
-                btn.textContent = opt;
-                btn.onclick = () => selectOption(index);
-                optionsContainer.appendChild(btn);
+            const currentData = currentQuestions[currentQuestionIndex];
+            questionTracker.innerText = `Soal ${currentQuestionIndex + 1} dari ${currentQuestions.length}`;
+            scoreTracker.innerText = `Skor: ${score}`;
+            questionText.innerText = currentData.question;
+
+            optionsList.innerHTML = "";
+            currentData.options.forEach((option, index) => {
+                const li = document.createElement("li");
+                li.className = "option-item";
+                li.innerText = option;
+                li.onclick = () => selectOption(index);
+                optionsList.appendChild(li);
             });
         }
 
@@ -449,41 +363,37 @@
             if (answered) return;
             answered = true;
 
-            const q = questions[currentQuestion];
-            const buttons = optionsContainer.children;
+            const currentData = currentQuestions[currentQuestionIndex];
+            const optionItems = optionsList.getElementsByClassName("option-item");
+            const pointsPerQuestion = 100 / currentQuestions.length;
 
-            // Highlight answers
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].disabled = true;
-                if (i === q.answer) {
-                    buttons[i].classList.add("correct");
-                } else if (i === selectedIndex) {
-                    buttons[i].classList.add("incorrect");
-                }
+            if (selectedIndex === currentData.answer) {
+                optionItems[selectedIndex].classList.add("correct");
+                score += Math.round(pointsPerQuestion);
+                scoreTracker.innerText = `Skor: ${score}`;
+            } else {
+                optionItems[selectedIndex].classList.add("incorrect");
+                optionItems[currentData.answer].classList.add("correct");
             }
 
-            // Update score
-            if (selectedIndex === q.answer) {
-                score += 5; // Total 20 soal x 5 poin = 100 max
-                scoreTracker.textContent = `Skor: ${score}`;
+            for (let item of optionItems) {
+                item.classList.add("disabled");
             }
 
-            // Show explanation
-            explanationText.textContent = q.explanation;
+            explanationText.innerText = currentData.explanation;
             explanationBox.style.display = "block";
 
-            // Show next button or finish
-            if (currentQuestion < questions.length - 1) {
-                nextBtn.textContent = "Soal Berikutnya ➡️";
+            nextBtn.disabled = false;
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                nextBtn.innerText = "Lihat Hasil Kuis";
             } else {
-                nextBtn.textContent = "Lihat Hasil Akhir 🏆";
+                nextBtn.innerText = "Lanjut ke Soal Berikutnya";
             }
-            nextBtnContainer.style.display = "block";
         }
 
         function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuestions.length) {
                 loadQuestion();
             } else {
                 showResult();
@@ -493,24 +403,21 @@
         function showResult() {
             quizScreen.style.display = "none";
             resultScreen.style.display = "block";
-            
-            document.getElementById("final-score").textContent = `${score} / 100`;
-            
-            const remark = document.getElementById("final-remark");
-            if (score === 100) {
-                remark.textContent = "Luar biasa! Kamu jenius matematika sejati! 🌟";
-            } else if (score >= 80) {
-                remark.textContent = "Hebat sekali! Pemahamanmu tentang bilangan cacah sudah sangat baik! 👍";
+            finalScore.innerText = `${score} / 100`;
+
+            if (score >= 80) {
+                resultMessage.innerText = "Luar biasa! Kamu hebat sekali memahami materi ini! 🌟";
             } else if (score >= 50) {
-                remark.textContent = "Kerja bagus! Terus berlatih agar semakin mahir ya! 💪";
+                resultMessage.innerText = "Kerja bagus! Pertahankan semangat belajarnya ya! 👍";
             } else {
-                remark.textContent = "Jangan menyerah! Yuk coba lagi dan pelajari pembahasannya ya! 😊";
+                resultMessage.innerText = "Jangan menyerah! Ayo ulangi lagi kuisnya untuk nilai lebih baik! 💪";
             }
         }
 
-        function restartQuiz() {
+        function backToMenu() {
+            quizScreen.style.display = "none";
             resultScreen.style.display = "none";
-            startScreen.style.display = "block";
+            mainMenu.style.display = "block";
         }
     </script>
 </body>
