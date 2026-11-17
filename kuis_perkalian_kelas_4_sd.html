@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Matematika Asyik: Perkalian Bilangan Cacah</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#4A90E2',
+                            yellow: '#FFC107',
+                            green: '#2ECC71',
+                            red: '#E74C3C',
+                            purple: '#9B59B6',
+                            bg: '#F4F9FF'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F9FF;
+            background-image: radial-gradient(#e0edff 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+        .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .bounce-short {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-white border-b-4 border-blue-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-blue-500 flex items-center justify-center text-white text-xl shadow-md font-heading font-bold">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <h1 class="font-heading text-lg md:text-xl text-blue-600 font-bold leading-tight">Matematika Asyik!</h1>
+                    <p class="text-xs text-slate-500 font-medium">Kelas 4 SD • Perkalian Bilangan Cacah (1-100)</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-100">
+                <i class="fa-solid fa-trophy text-amber-500 text-lg"></i>
+                <span class="text-xs text-slate-500 font-medium hidden sm:inline">Skor:</span>
+                <span id="score-display" class="font-heading text-lg text-blue-700 font-bold">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col">
+        
+        <!-- Welcome Screen (Start Screen) -->
+        <div id="start-card" class="bg-white rounded-3xl p-6 md:p-10 shadow-lg border-2 border-blue-100 text-center my-auto">
+            <div class="w-24 h-24 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
+                <i class="fa-solid fa-star bounce-short"></i>
+            </div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-800 mb-3">Siap Menjadi Jagoan Perkalian? 🚀</h2>
+            <p class="text-slate-600 mb-6 max-w-md mx-auto text-sm md:text-base leading-relaxed">
+                Kamu akan mengerjakan <span class="font-bold text-blue-600">50 soal perkalian</span> seru. Pilih jawaban yang benar, cek pembahasannya, dan dapatkan skor tertinggi!
+            </p>
+            <div class="bg-blue-50 p-4 rounded-2xl mb-8 max-w-md mx-auto text-left border border-blue-100 text-xs md:text-sm text-slate-600 space-y-2">
+                <div class="flex items-start space-x-2">
+                    <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                    <span>Tersedia pembahasan lengkap di setiap soal.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                    <span>Bisa melompati dan kembali ke soal pilihanmu kapan saja.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                    <span>Hasil evaluasi lengkap muncul di akhir kuis.</span>
+                </div>
+            </div>
+            <button onclick="startQuiz()" class="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-heading font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition duration-200">
+                <i class="fa-solid fa-play mr-2"></i> Mulai Kuis Sekarang
+            </button>
+        </div>
+
+        <!-- Quiz Container (Hidden initially) -->
+        <div id="quiz-card" class="hidden flex-col gap-4">
+            
+            <!-- Progress Bar Card -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-2">
+                <div class="flex justify-between items-center text-xs md:text-sm font-semibold text-slate-600">
+                    <span id="question-number-badge" class="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg font-heading">
+                        Soal 1 dari 50
+                    </span>
+                    <span id="progress-percent" class="text-slate-500">0% Selesai</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-500 h-3 rounded-full transition-all duration-300" style="width: 2%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-3xl p-5 md:p-8 shadow-md border-2 border-slate-100 flex flex-col">
+                <!-- Navigation Drawer Toggle for Mobile / Quick Grid -->
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pertanyaan</span>
+                    <button onclick="toggleGridModal()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3 py-1.5 rounded-xl flex items-center gap-1 transition">
+                        <i class="fa-solid fa-th"></i> Daftar Soal
+                    </button>
+                </div>
+
+                <!-- Question Text -->
+                <div id="question-text" class="text-lg md:text-xl font-medium text-slate-800 mb-6 leading-relaxed">
+                    <!-- Text soal akan dimuat via JS -->
+                </div>
+
+                <!-- Options Grid -->
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-6">
+                    <!-- Opsi A, B, C, D dimuat via JS -->
+                </div>
+
+                <!-- Discussion / Explanation Box (Hidden by default) -->
+                <div id="explanation-box" class="hidden rounded-2xl p-4 md:p-5 border-2 transition-all duration-300">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div id="explanation-icon" class="text-xl"></div>
+                        <h4 id="explanation-title" class="font-heading font-bold text-base md:text-lg"></h4>
+                    </div>
+                    <p id="explanation-text" class="text-xs md:text-sm leading-relaxed text-slate-700"></p>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation Controls -->
+            <div class="flex justify-between items-center gap-2 mt-2">
+                <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-3 bg-white hover:bg-slate-100 active:scale-95 text-slate-700 font-heading font-semibold text-sm rounded-2xl border border-slate-200 shadow-sm transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Sebelum
+                </button>
+
+                <div class="flex gap-2">
+                    <button id="next-btn" onclick="nextQuestion()" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 active:scale-95 text-white font-heading font-semibold text-sm rounded-2xl shadow-md transition">
+                        Lanjut <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                    <button id="finish-btn" onclick="finishQuiz()" class="hidden px-6 py-3 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-heading font-bold text-sm rounded-2xl shadow-md transition">
+                        <i class="fa-solid fa-flag-checkered mr-1"></i> Selesai
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Result Screen (Hidden initially) -->
+        <div id="result-card" class="hidden bg-white rounded-3xl p-6 md:p-10 shadow-lg border-2 border-blue-100 text-center my-auto">
+            <div id="result-badge" class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner">
+                <!-- Dynamic Emoji/Icon -->
+            </div>
+            
+            <h2 id="result-title" class="font-heading text-2xl md:text-3xl font-bold text-slate-800 mb-1"></h2>
+            <p id="result-subtitle" class="text-slate-500 text-sm mb-6"></p>
+
+            <!-- Final Score Display -->
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-3xl mb-6 shadow-md max-w-sm mx-auto">
+                <div class="text-xs uppercase tracking-widest font-semibold text-blue-100 mb-1">Nilai Akhir Kamu</div>
+                <div id="final-score" class="font-heading text-6xl font-extrabold my-1">0</div>
+                <div id="score-percentage" class="text-xs font-medium text-blue-200">0% Jawaban Benar</div>
+            </div>
+
+            <!-- Stats Breakdown -->
+            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-8">
+                <div class="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl flex flex-col items-center">
+                    <span class="text-emerald-500 font-bold text-2xl" id="correct-count">0</span>
+                    <span class="text-xs text-slate-600 font-medium">Jawaban Benar</span>
+                </div>
+                <div class="bg-rose-50 border border-rose-100 p-4 rounded-2xl flex flex-col items-center">
+                    <span class="text-rose-500 font-bold text-2xl" id="wrong-count">0</span>
+                    <span class="text-xs text-slate-600 font-medium">Jawaban Salah</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                <button onclick="restartQuiz()" class="w-full sm:w-auto px-6 py-3.5 bg-blue-500 hover:bg-blue-600 active:scale-95 text-white font-heading font-bold text-sm rounded-2xl shadow-md transition">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Coba Lagi
+                </button>
+                <button onclick="toggleGridModal()" class="w-full sm:w-auto px-6 py-3.5 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 font-heading font-bold text-sm rounded-2xl border border-slate-200 transition">
+                    <i class="fa-solid fa-list-check mr-2"></i> Tinjau Semua Jawaban
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Quick Navigation Modal (Grid Soal) -->
+    <div id="grid-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[85vh]">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-heading font-bold text-lg text-slate-800">Navigasi Soal</h3>
+                <button onclick="toggleGridModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-slate-500 mb-3">Klik nomor di bawah untuk langsung berpindah ke soal tersebut:</p>
+
+            <!-- Scrollable Grid Container -->
+            <div id="questions-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 overflow-y-auto p-1 custom-scrollbar flex-grow">
+                <!-- Item Grid dimasukkan via JS -->
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-around text-xs text-slate-500">
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Benar</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> Salah</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span> Aktif</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-200 inline-block"></span> Belum</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Database 50 Soal Perkalian Bilangan Cacah sampai 100
+        const questionsData = [
+            // Basic Multiplication (1 - 20)
+            { id: 1, q: "Berapakah hasil dari 3 × 4?", options: ["10", "12", "14", "16"], answer: 1, explanation: "3 × 4 artinya penjumlahan angka 4 sebanyak 3 kali: 4 + 4 + 4 = 12." },
+            { id: 2, q: "Hasil dari 5 × 6 adalah...", options: ["25", "30", "35", "40"], answer: 1, explanation: "5 × 6 artinya penjumlahan angka 6 sebanyak 5 kali: 6 + 6 + 6 + 6 + 6 = 30." },
+            { id: 3, q: "Berapakah hasil dari 7 × 2?", options: ["14", "16", "18", "12"], answer: 0, explanation: "7 × 2 artinya 2 ditambah sebanyak 7 kali (2 + 2 + 2 + 2 + 2 + 2 + 2) = 14." },
+            { id: 4, q: "Hasil perkalian dari 4 × 8 adalah...", options: ["28", "32", "36", "40"], answer: 1, explanation: "4 × 8 = 32. Bisa dihitung dengan melipatgandakan 8 sebanyak 4 kali." },
+            { id: 5, q: "Berapakah hasil dari 9 × 3?", options: ["24", "27", "30", "21"], answer: 1, explanation: "9 × 3 = 27. (3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 = 27)." },
+            { id: 6, q: "Berapakah hasil dari 6 × 7?", options: ["42", "36", "48", "40"], answer: 0, explanation: "6 × 7 = 42. Penjumlahan 7 sebanyak 6 kali menghasilkan 42." },
+            { id: 7, q: "Hasil dari 8 × 5 adalah...", options: ["35", "40", "45", "50"], answer: 1, explanation: "Perkalian dengan angka 5 selalu berakhiran 0 atau 5. 8 × 5 = 40." },
+            { id: 8, q: "Berapakah hasil dari 10 × 4?", options: ["30", "40", "50", "14"], answer: 1, explanation: "Setiap bilangan yang dikali 10 cukup ditambahkan angka 0 di belakangnya. 4 × 10 = 40." },
+            { id: 9, q: "Hasil dari 7 × 7 adalah...", options: ["42", "48", "49", "56"], answer: 2, explanation: "7 × 7 = 49." },
+            { id: 10, q: "Berapakah hasil dari 9 × 6?", options: ["54", "63", "45", "52"], answer: 0, explanation: "9 × 6 = 54." },
+            { id: 11, q: "Berapakah hasil dari 8 × 8?", options: ["56", "64", "72", "60"], answer: 1, explanation: "8 × 8 = 64." },
+            { id: 12, q: "Hasil perkalian 9 × 8 adalah...", options: ["72", "81", "63", "74"], answer: 0, explanation: "9 × 8 = 72." },
+            { id: 13, q: "Berapakah hasil dari 10 × 10?", options: ["90", "100", "110", "1000"], answer: 1, explanation: "10 × 10 = 100." },
+            { id: 14, q: "Semua bilangan yang dikalikan dengan angka 0 hasilnya adalah...", options: ["Bilangan itu sendiri", "1", "0", "10"], answer: 2, explanation: "Sifat utama angka 0: Berapapun bilangannya jika dikalikan 0 hasilnya selalu 0." },
+            { id: 15, q: "Semua bilangan yang dikalikan dengan angka 1 hasilnya adalah...", options: ["0", "1", "Bilangan itu sendiri", "10"], answer: 2, explanation: "Angka 1 adalah unsur identitas perkalian, jadi hasilnya selalu bilangan itu sendiri." },
+            { id: 16, q: "Berapakah hasil dari 6 × 6?", options: ["32", "36", "38", "42"], answer: 1, explanation: "6 × 6 = 36." },
+            { id: 17, q: "Hasil dari 9 × 9 adalah...", options: ["72", "81", "90", "99"], answer: 1, explanation: "9 × 9 = 81." },
+            { id: 18, q: "Berapakah hasil dari 7 × 8?", options: ["54", "56", "58", "62"], answer: 1, explanation: "7 × 8 = 56." },
+            { id: 19, q: "Hasil perkalian 5 × 9 adalah...", options: ["40", "45", "50", "35"], answer: 1, explanation: "5 × 9 = 45." },
+            { id: 20, q: "Berapakah hasil dari 4 × 7?", options: ["24", "26", "28", "32"], answer: 2, explanation: "4 × 7 = 28." },
+
+            // Word Problems & Applied Concepts (21 - 50)
+            { id: 21, q: "Ibu membeli 4 kantong plastik. Setiap kantong berisi 5 buah apel. Berapa jumlah seluruh apel yang dibeli ibu?", options: ["15 buah", "20 buah", "25 buah", "18 buah"], answer: 1, explanation: "Kalimat matematikanya adalah 4 × 5 = 20 buah apel." },
+            { id: 22, q: "Budi memiliki 6 kotak pensil. Setiap kotak berisi 8 pensil. Berapa total pensil yang dimiliki Budi?", options: ["42 pensil", "48 pensil", "54 pensil", "40 pensil"], answer: 1, explanation: "Total pensil = 6 kotak × 8 pensil = 48 pensil." },
+            { id: 23, q: "Di dalam kelas terdapat 5 baris meja. Setiap baris diisi oleh 7 siswa. Berapa jumlah siswa di kelas tersebut?", options: ["35 siswa", "30 siswa", "40 siswa", "32 siswa"], answer: 0, explanation: "Jumlah siswa = 5 baris × 7 siswa = 35 siswa." },
+            { id: 24, q: "Siti menabung Rp 5.000 setiap hari selama 7 hari. Berapa total uang tabungan Siti?", options: ["Rp 30.000", "Rp 35.000", "Rp 40.000", "Rp 25.000"], answer: 1, explanation: "Total tabungan = 7 hari × 5.000 = Rp 35.000." },
+            { id: 25, q: "Sebuah mobil memiliki 4 roda. Jika ada 9 mobil di tempat parkir, berapa jumlah seluruh roda mobil tersebut?", options: ["32 roda", "36 roda", "40 roda", "28 roda"], answer: 1, explanation: "Jumlah roda = 9 mobil × 4 roda = 36 roda." },
+            { id: 26, q: "Pak Tani menanam pohon pisang dalam 8 baris. Setiap baris terdiri dari 6 pohon. Berapa banyak pohon pisang seluruhnya?", options: ["48 pohon", "42 pohon", "54 pohon", "40 pohon"], answer: 0, explanation: "Jumlah pohon = 8 baris × 6 pohon = 48 pohon." },
+            { id: 27, q: "Toko buku memiliki 3 rak buku. Setiap rak memuat 25 buku. Berapa jumlah buku di toko tersebut?", options: ["50 buku", "75 buku", "100 buku", "65 buku"], answer: 1, explanation: "Jumlah buku = 3 rak × 25 buku = 75 buku." },
+            { id: 28, q: "Berapakah hasil perkalian dari 12 × 4?", options: ["44", "48", "52", "46"], answer: 1, explanation: "12 × 4 = (10 × 4) + (2 × 4) = 40 + 8 = 48." },
+            { id: 29, q: "Hasil dari 15 × 5 adalah...", options: ["65", "70", "75", "80"], answer: 2, explanation: "15 × 5 = (10 × 5) + (5 × 5) = 50 + 25 = 75." },
+            { id: 30, q: "Berapakah hasil perkalian 20 × 4?", options: ["60", "80", "100", "70"], answer: 1, explanation: "20 × 4 = 2 puluhan × 4 = 8 puluhan = 80." },
+            { id: 31, q: "Edo mempunyai 7 akuarium. Masing-masing akuarium berisi 9 ekor ikan mas. Berapa ekor jumlah ikan mas Edo?", options: ["63 ekor", "56 ekor", "72 ekor", "64 ekor"], answer: 0, explanation: "Total ikan = 7 akuarium × 9 ekor = 63 ekor." },
+            { id: 32, q: "Berapakah hasil dari 14 × 3?", options: ["38", "42", "46", "40"], answer: 1, explanation: "14 × 3 = (10 × 3) + (4 × 3) = 30 + 12 = 42." },
+            { id: 33, q: "Sebuah keranjang berisi 10 buah mangga. Jika ibu membeli 8 keranjang, berapa jumlah mangga seluruhnya?", options: ["70 buah", "80 buah", "90 buah", "100 buah"], answer: 1, explanation: "Jumlah mangga = 8 keranjang × 10 buah = 80 buah." },
+            { id: 34, q: "Berapakah hasil dari 25 × 4?", options: ["75", "100", "90", "85"], answer: 1, explanation: "25 + 25 + 25 + 25 = 100." },
+            { id: 35, q: "Berapakah hasil dari 11 × 7?", options: ["77", "66", "88", "71"], answer: 0, explanation: "11 × 7 = 77." },
+            { id: 36, q: "Doni membeli 5 bungkus kelereng. Setiap bungkus berisi 12 kelereng. Berapa total kelereng Doni?", options: ["50 kelereng", "60 kelereng", "70 kelereng", "55 kelereng"], answer: 1, explanation: "Total kelereng = 5 bungkus × 12 kelereng = 60 kelereng." },
+            { id: 37, q: "Berapakah hasil dari 13 × 5?", options: ["60", "65", "70", "55"], answer: 1, explanation: "13 × 5 = (10 × 5) + (3 × 5) = 50 + 15 = 65." },
+            { id: 38, q: "Di sebuah tempat parkir ada 10 sepeda motor. Setiap sepeda motor memiliki 2 roda. Berapa total roda sepeda motor?", options: ["12 roda", "20 roda", "15 roda", "25 roda"], answer: 1, explanation: "Total roda = 10 motor × 2 roda = 20 roda." },
+            { id: 39, q: "Berapakah hasil dari 16 × 4?", options: ["64", "54", "74", "60"], answer: 0, explanation: "16 × 4 = (10 × 4) + (6 × 4) = 40 + 24 = 64." },
+            { id: 40, q: "Berapakah hasil dari 50 × 2?", options: ["80", "90", "100", "70"], answer: 2, explanation: "50 × 2 = 50 + 50 = 100." },
+            { id: 41, q: "Ayah membagikan uang kepada 4 anaknya. Masing-masing anak menerima Rp 10.000. Berapa total uang yang dibagikan Ayah?", options: ["Rp 30.000", "Rp 40.000", "Rp 50.000", "Rp 45.000"], answer: 1, explanation: "Total uang = 4 anak × Rp 10.000 = Rp 40.000." },
+            { id: 42, q: "Berapakah hasil dari 15 × 6?", options: ["80", "85", "90", "95"], answer: 2, explanation: "15 × 6 = (10 × 6) + (5 × 6) = 60 + 30 = 90." },
+            { id: 43, q: "Di lapangan ada 8 kelompok siswa. Setiap kelompok terdiri dari 10 siswa. Berapa jumlah siswa seluruhnya?", options: ["70 siswa", "80 siswa", "90 siswa", "85 siswa"], answer: 1, explanation: "Jumlah siswa = 8 kelompok × 10 siswa = 80 siswa." },
+            { id: 44, q: "Berapakah hasil dari 18 × 3?", options: ["51", "54", "57", "60"], answer: 1, explanation: "18 × 3 = (10 × 3) + (8 × 3) = 30 + 24 = 54." },
+            { id: 45, q: "Berapakah hasil dari 22 × 4?", options: ["88", "84", "86", "90"], answer: 0, explanation: "22 × 4 = (20 × 4) + (2 × 4) = 80 + 8 = 88." },
+            { id: 46, q: "Ibu membeli 9 dus kue. Setiap dus berisi 10 potong kue. Berapa jumlah seluruh potong kue?", options: ["80 potong", "90 potong", "100 potong", "95 potong"], answer: 1, explanation: "Jumlah kue = 9 dus × 10 potong = 90 potong." },
+            { id: 47, q: "Berapakah hasil dari 17 × 5?", options: ["75", "80", "85", "90"], answer: 2, explanation: "17 × 5 = (10 × 5) + (7 × 5) = 50 + 35 = 85." },
+            { id: 48, q: "Berapakah hasil dari 12 × 8?", options: ["92", "96", "86", "98"], answer: 1, explanation: "12 × 8 = (10 × 8) + (2 × 8) = 80 + 16 = 96." },
+            { id: 49, q: "Berapakah hasil dari 24 × 3?", options: ["72", "68", "76", "70"], answer: 0, explanation: "24 × 3 = (20 × 3) + (4 × 3) = 60 + 12 = 72." },
+            { id: 50, q: "Setiap meja makan dikelilingi 6 kursi. Jika terdapat 8 meja makan, berapa jumlah seluruh kursi?", options: ["42 kursi", "48 kursi", "54 kursi", "46 kursi"], answer: 1, explanation: "Jumlah kursi = 8 meja × 6 kursi = 48 kursi." }
+        ];
+
+        // Application State
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let currentScore = 0;
+
+        // Start Quiz
+        function startQuiz() {
+            document.getElementById('start-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            document.getElementById('quiz-card').classList.add('flex');
+            currentQuestionIndex = 0;
+            renderQuestion();
+            renderGridModal();
+        }
+
+        // Render Current Question
+        function renderQuestion() {
+            const q = questionsData[currentQuestionIndex];
+            
+            // Update Badges & Progress Bar
+            document.getElementById('question-number-badge').innerText = `Soal ${currentQuestionIndex + 1} dari ${questionsData.length}`;
+            const progressPercent = Math.round(((currentQuestionIndex + 1) / questionsData.length) * 100);
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('progress-percent').innerText = `${progressPercent}% Selesai`;
+
+            // Set Question Text
+            document.getElementById('question-text').innerHTML = `<span class="font-heading text-blue-600 font-bold mr-2">${q.id}.</span> ${q.q}`;
+
+            // Render Options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            const hasAnswered = userAnswers[currentQuestionIndex] !== null;
+            const selectedOption = userAnswers[currentQuestionIndex];
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-2xl border-2 font-medium flex items-center justify-between transition-all duration-200 text-sm md:text-base`;
+                
+                let btnStyle = "border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50/50 text-slate-700";
+                let badgeStyle = "bg-slate-100 text-slate-600";
+                let iconHtml = '';
+
+                if (hasAnswered) {
+                    if (idx === q.answer) {
+                        // Correct option
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold";
+                        badgeStyle = "bg-emerald-500 text-white";
+                        iconHtml = '<i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>';
+                    } else if (idx === selectedOption) {
+                        // Wrong selected option
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-900 font-semibold";
+                        badgeStyle = "bg-rose-500 text-white";
+                        iconHtml = '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>';
+                    } else {
+                        // Other unselected options
+                        btnStyle = "border-slate-100 bg-slate-50 text-slate-400 opacity-60";
+                    }
+                }
+
+                btn.className = `${btn.className} ${btnStyle}`;
+                btn.disabled = hasAnswered;
+                btn.onclick = () => selectAnswer(idx);
+
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-xl ${badgeStyle} flex items-center justify-center font-heading font-bold text-xs shrink-0">
+                            ${optionLabels[idx]}
+                        </span>
+                        <span>${opt}</span>
+                    </div>
+                    ${iconHtml}
+                `;
+
+                optionsContainer.appendChild(btn);
+            });
+
+            // Render Explanation Box
+            const expBox = document.getElementById('explanation-box');
+            if (hasAnswered) {
+                const isCorrect = selectedOption === q.answer;
+                expBox.classList.remove('hidden');
+                
+                if (isCorrect) {
+                    expBox.className = "rounded-2xl p-4 md:p-5 border-2 bg-emerald-50 border-emerald-200 text-emerald-900";
+                    document.getElementById('explanation-icon').innerHTML = '<i class="fa-solid fa-face-smile text-emerald-500"></i>';
+                    document.getElementById('explanation-title').innerText = "Hebat! Jawabanmu Benar 🎉";
+                    document.getElementById('explanation-title').className = "font-heading font-bold text-emerald-700 text-base md:text-lg";
+                } else {
+                    expBox.className = "rounded-2xl p-4 md:p-5 border-2 bg-rose-50 border-rose-200 text-rose-900";
+                    document.getElementById('explanation-icon').innerHTML = '<i class="fa-solid fa-face-sad-tear text-rose-500"></i>';
+                    document.getElementById('explanation-title').innerText = "Yuk, Pelajari Lagi Pembahasannya!";
+                    document.getElementById('explanation-title').className = "font-heading font-bold text-rose-700 text-base md:text-lg";
+                }
+
+                document.getElementById('explanation-text').innerHTML = `<strong>Pembahasan:</strong> ${q.explanation}`;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Update Navigation Buttons
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+
+            if (currentQuestionIndex === questionsData.length - 1) {
+                document.getElementById('next-btn').classList.add('hidden');
+                document.getElementById('finish-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('finish-btn').classList.add('hidden');
+            }
+
+            // Update Score Live Display
+            calculateScore();
+            renderGridModal();
+        }
+
+        // Handle Selecting Answer
+        function selectAnswer(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            renderQuestion();
+        }
+
+        // Calculate Total Score
+        function calculateScore() {
+            let correct = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                }
+            });
+            // Each question gives 2 points (50 x 2 = 100 max)
+            currentScore = correct * 2;
+            document.getElementById('score-display').innerText = currentScore;
+        }
+
+        // Navigation Handlers
+        function nextQuestion() {
+            if (currentQuestionIndex < questionsData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function jumpToQuestion(index) {
+            currentQuestionIndex = index;
+            renderQuestion();
+            toggleGridModal(false);
+        }
+
+        // Quick Nav Modal Toggle
+        function toggleGridModal(forceState = null) {
+            const modal = document.getElementById('grid-modal');
+            if (forceState !== null) {
+                if (forceState) modal.classList.remove('hidden');
+                else modal.classList.add('hidden');
+            } else {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Render Quick Navigation Grid
+        function renderGridModal() {
+            const gridContainer = document.getElementById('questions-grid');
+            gridContainer.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                const userAns = userAnswers[idx];
+                let bgStyle = "bg-slate-100 text-slate-600 hover:bg-slate-200";
+
+                if (userAns !== null) {
+                    if (userAns === q.answer) {
+                        bgStyle = "bg-emerald-500 text-white font-bold";
+                    } else {
+                        bgStyle = "bg-rose-500 text-white font-bold";
+                    }
+                }
+
+                if (idx === currentQuestionIndex) {
+                    bgStyle += " ring-4 ring-blue-300 font-bold border-2 border-blue-600";
+                }
+
+                btn.className = `w-9 h-9 rounded-xl flex items-center justify-center font-heading text-xs transition duration-150 ${bgStyle}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => jumpToQuestion(idx);
+
+                gridContainer.appendChild(btn);
+            });
+        }
+
+        // Finish Quiz & Show Evaluation Result
+        function finishQuiz() {
+            calculateScore();
+
+            let correctCount = 0;
+            let wrongCount = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            });
+
+            const totalScore = correctCount * 2; // Maximum 100
+            const percentage = Math.round((correctCount / questionsData.length) * 100);
+
+            // Populate Results Modal Data
+            document.getElementById('final-score').innerText = totalScore;
+            document.getElementById('score-percentage').innerText = `${percentage}% Jawaban Benar`;
+            document.getElementById('correct-count').innerText = correctCount;
+            document.getElementById('wrong-count').innerText = wrongCount;
+
+            // Tailor Feedback Message based on Score
+            const badgeEl = document.getElementById('result-badge');
+            const titleEl = document.getElementById('result-title');
+            const subTitleEl = document.getElementById('result-subtitle');
+
+            if (totalScore >= 85) {
+                badgeEl.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner bg-amber-100 text-amber-500";
+                badgeEl.innerHTML = '<i class="fa-solid fa-crown bounce-short"></i>';
+                titleEl.innerText = "Luar Biasa! Jagoan Perkalian! 🏆";
+                subTitleEl.innerText = "Pemahaman matematika kamu sangat mengagumkan. Pertahankan prestasimu!";
+            } else if (totalScore >= 70) {
+                badgeEl.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner bg-blue-100 text-blue-500";
+                badgeEl.innerHTML = '<i class="fa-solid fa-star text-blue-500"></i>';
+                titleEl.innerText = "Hebat Sekali! 👍";
+                subTitleEl.innerText = "Kamu sudah memahami perkalian dengan baik. Terus berlatih agar makin sempurna!";
+            } else {
+                badgeEl.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner bg-orange-100 text-orange-500";
+                badgeEl.innerHTML = '<i class="fa-solid fa-lightbulb text-orange-500"></i>';
+                titleEl.innerText = "Tetap Semangat Belajar! 💪";
+                subTitleEl.innerText = "Jangan menyerah ya! Kamu bisa mempelajari pembahasan tiap soal dan mencoba lagi.";
+            }
+
+            // Switch Screen
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('flex');
+            document.getElementById('result-card').classList.remove('hidden');
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            userAnswers = new Array(questionsData.length).fill(null);
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            document.getElementById('score-display').innerText = "0";
+
+            document.getElementById('result-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            document.getElementById('quiz-card').classList.add('flex');
+
+            renderQuestion();
+            renderGridModal();
+        }
+    </script>
+</body>
+</html>
