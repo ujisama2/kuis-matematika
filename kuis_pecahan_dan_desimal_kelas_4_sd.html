@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Matematika: Pecahan, Desimal & Persen Kelas 4 SD</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka & Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kid: {
+                            blue: '#0284C7',
+                            teal: '#0D9488',
+                            green: '#10B981',
+                            orange: '#F97316',
+                            yellow: '#F59E0B',
+                            purple: '#8B5CF6',
+                            pink: '#EC4899',
+                            bg: '#F0F9FF'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #F0F9FF;
+            background-image: radial-gradient(#bae6fd 2px, transparent 2px);
+            background-size: 24px 24px;
+        }
+        .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .bounce-short {
+            animation: bounce 0.6s ease infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-8px); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-sky-200">
+
+    <!-- Header Section -->
+    <header class="bg-white border-b-4 border-sky-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-sky-500 flex items-center justify-center text-white text-xl shadow-md font-heading font-bold">
+                    <i class="fa-solid fa-pie-chart"></i>
+                </div>
+                <div>
+                    <h1 class="font-heading text-lg md:text-xl text-sky-600 font-bold leading-tight">Petualangan Pecahan & Desimal</h1>
+                    <p class="text-xs text-slate-500 font-semibold">Kelas 4 SD • 100 Soal Pilihan Ganda</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 bg-sky-50 px-3.5 py-1.5 rounded-2xl border border-sky-100">
+                <i class="fa-solid fa-star text-amber-400 text-lg"></i>
+                <span class="text-xs text-slate-500 font-bold hidden sm:inline">Skor Live:</span>
+                <span id="score-display" class="font-heading text-lg text-sky-700 font-bold">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col">
+        
+        <!-- Welcome Screen -->
+        <div id="start-card" class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-2 border-sky-100 text-center my-auto">
+            <div class="w-24 h-24 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
+                <i class="fa-solid fa-shapes bounce-short"></i>
+            </div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-800 mb-3">Master Pecahan, Desimal & Persen 🎯</h2>
+            <p class="text-slate-600 mb-6 max-w-lg mx-auto text-sm md:text-base leading-relaxed font-medium">
+                Uji kemampuanmu menyelesaikannya lewat <span class="font-bold text-sky-600">100 Soal Pilihan Ganda</span> interaktif.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 max-w-lg mx-auto text-left text-xs md:text-sm font-medium">
+                <div class="bg-sky-50 p-3 rounded-2xl border border-sky-100 flex items-center space-x-2.5">
+                    <i class="fa-solid fa-check-circle text-sky-500 text-lg"></i>
+                    <span>1. Pecahan Pembilang Satu</span>
+                </div>
+                <div class="bg-sky-50 p-3 rounded-2xl border border-sky-100 flex items-center space-x-2.5">
+                    <i class="fa-solid fa-check-circle text-sky-500 text-lg"></i>
+                    <span>2. Pecahan Penyebut Sama</span>
+                </div>
+                <div class="bg-sky-50 p-3 rounded-2xl border border-sky-100 flex items-center space-x-2.5">
+                    <i class="fa-solid fa-check-circle text-sky-500 text-lg"></i>
+                    <span>3. Pecahan Senilai</span>
+                </div>
+                <div class="bg-sky-50 p-3 rounded-2xl border border-sky-100 flex items-center space-x-2.5">
+                    <i class="fa-solid fa-check-circle text-sky-500 text-lg"></i>
+                    <span>4. Desimal & Persen (%)</span>
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="w-full sm:w-auto px-10 py-4 bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-heading font-bold text-lg rounded-2xl shadow-lg hover:shadow-sky-200 transition duration-200">
+                <i class="fa-solid fa-play mr-2"></i> Mulai Kuis Sekarang
+            </button>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-card" class="hidden flex-col gap-4">
+            
+            <!-- Progress Bar Card -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-2">
+                <div class="flex justify-between items-center text-xs md:text-sm font-bold text-slate-600">
+                    <span id="question-number-badge" class="bg-sky-100 text-sky-800 px-3 py-1 rounded-xl font-heading">
+                        Soal 1 dari 100
+                    </span>
+                    <span id="progress-percent" class="text-sky-600 font-heading">0% Selesai</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-200">
+                    <div id="progress-bar" class="bg-gradient-to-r from-sky-400 to-sky-500 h-2.5 rounded-full transition-all duration-300" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-3xl p-5 md:p-8 shadow-md border-2 border-slate-100 flex flex-col">
+                <!-- Navigation Grid Trigger -->
+                <div class="flex justify-between items-center mb-4">
+                    <span id="topic-badge" class="text-xs font-bold text-sky-600 bg-sky-50 px-3 py-1 rounded-lg border border-sky-100 uppercase tracking-wider">Topik</span>
+                    <button onclick="toggleGridModal()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-grip"></i> Grid Soal (1-100)
+                    </button>
+                </div>
+
+                <!-- Question Text -->
+                <div id="question-text" class="text-lg md:text-xl font-bold text-slate-800 mb-6 leading-relaxed">
+                    <!-- Text soal dimuat via JS -->
+                </div>
+
+                <!-- Options Grid -->
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-6">
+                    <!-- Opsi A, B, C, D dimuat via JS -->
+                </div>
+
+                <!-- Discussion / Explanation Box -->
+                <div id="explanation-box" class="hidden rounded-2xl p-4 md:p-5 border-2 transition-all duration-300">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div id="explanation-icon" class="text-xl"></div>
+                        <h4 id="explanation-title" class="font-heading font-bold text-base md:text-lg"></h4>
+                    </div>
+                    <p id="explanation-text" class="text-xs md:text-sm leading-relaxed text-slate-700 font-medium"></p>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation Controls -->
+            <div class="flex justify-between items-center gap-2 mt-2">
+                <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-3 bg-white hover:bg-slate-100 active:scale-95 text-slate-700 font-heading font-semibold text-sm rounded-2xl border border-slate-200 shadow-sm transition disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Sebelum
+                </button>
+
+                <div class="flex gap-2">
+                    <button id="next-btn" onclick="nextQuestion()" class="px-6 py-3 bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-heading font-semibold text-sm rounded-2xl shadow-md transition">
+                        Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                    <button id="finish-btn" onclick="finishQuiz()" class="hidden px-6 py-3 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-heading font-bold text-sm rounded-2xl shadow-md transition">
+                        <i class="fa-solid fa-flag-checkered mr-1.5"></i> Selesai & Lihat Hasil
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-card" class="hidden bg-white rounded-3xl p-6 md:p-10 shadow-xl border-2 border-sky-100 text-center my-auto">
+            <div id="result-badge" class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner">
+                <!-- Dynamic Emoji/Icon -->
+            </div>
+            
+            <h2 id="result-title" class="font-heading text-2xl md:text-3xl font-bold text-slate-800 mb-1"></h2>
+            <p id="result-subtitle" class="text-slate-500 text-sm mb-6 font-medium"></p>
+
+            <!-- Final Score Display -->
+            <div class="bg-gradient-to-r from-sky-500 to-emerald-500 text-white p-6 rounded-3xl mb-6 shadow-lg max-w-sm mx-auto">
+                <div class="text-xs uppercase tracking-widest font-bold text-sky-100 mb-1">Nilai Akhir Kamu</div>
+                <div id="final-score" class="font-heading text-6xl font-extrabold my-1">0</div>
+                <div id="score-percentage" class="text-xs font-semibold text-sky-100">0% Jawaban Benar</div>
+            </div>
+
+            <!-- Stats Breakdown -->
+            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-8">
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex flex-col items-center">
+                    <span class="text-emerald-600 font-heading font-bold text-3xl" id="correct-count">0</span>
+                    <span class="text-xs text-slate-600 font-bold">Jawaban Benar</span>
+                </div>
+                <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl flex flex-col items-center">
+                    <span class="text-rose-500 font-heading font-bold text-3xl" id="wrong-count">0</span>
+                    <span class="text-xs text-slate-600 font-bold">Jawaban Salah</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                <button onclick="restartQuiz()" class="w-full sm:w-auto px-7 py-3.5 bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-heading font-bold text-sm rounded-2xl shadow-md transition">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Ulangi Kuis
+                </button>
+                <button onclick="toggleGridModal()" class="w-full sm:w-auto px-6 py-3.5 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 font-heading font-bold text-sm rounded-2xl border border-slate-200 transition">
+                    <i class="fa-solid fa-list-check mr-2"></i> Tinjau Soal
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Quick Navigation Modal (Grid Soal 1-100) -->
+    <div id="grid-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[85vh]">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100">
+                <h3 class="font-heading font-bold text-lg text-slate-800">Navigasi 100 Soal</h3>
+                <button onclick="toggleGridModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-slate-500 mb-3 font-medium">Klik nomor untuk berpindah soal secara langsung:</p>
+
+            <!-- Scrollable Grid Container -->
+            <div id="questions-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 overflow-y-auto p-1 custom-scrollbar flex-grow">
+                <!-- Item Grid dimuat via JS -->
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-around text-xs text-slate-600 font-semibold flex-wrap gap-2">
+                <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-emerald-500 inline-block"></span> Benar</div>
+                <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-rose-500 inline-block"></span> Salah</div>
+                <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-sky-500 inline-block"></span> Aktif</div>
+                <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-slate-200 inline-block"></span> Belum Dijawab</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Generating 100 Complete Questions Database
+        const questionsData = [
+            // --- BAB 1: PECAHAN PEMBILANG SATU (1 - 20) ---
+            { id: 1, topic: "Pecahan Pembilang Satu", q: "Sebuah kue dipotong menjadi 4 bagian sama besar. Satu bagian kue bernilai...", options: ["1/2", "1/3", "1/4", "1/5"], answer: 2, explanation: "1 bagian dari total 4 bagian yang sama besar bernilai pecahan 1/4." },
+            { id: 2, topic: "Pecahan Pembilang Satu", q: "Pada pecahan 1/8, angka 1 disebut...", options: ["Penyebut", "Pembilang", "Desimal", "Persen"], answer: 1, explanation: "Angka di atas garis pecahan (1) disebut pembilang, sedangkan angka di bawah garis (8) disebut penyebut." },
+            { id: 3, topic: "Pecahan Pembilang Satu", q: "Manakah pecahan pembilang satu di bawah ini yang nilainya PALING BESAR?", options: ["1/2", "1/4", "1/8", "1/10"], answer: 0, explanation: "Pada pecahan dengan pembilang sama (1), semakin kecil nilai penyebutnya, maka semakin besar nilai pecahannya. 1/2 adalah yang terbesar." },
+            { id: 4, topic: "Pecahan Pembilang Satu", q: "Satu potongan dari semangka yang dibagi 6 sama besar bernilai...", options: ["1/6", "6/1", "1/5", "6/6"], answer: 0, explanation: "Setiap potong dari 6 bagian bernilai 1/6." },
+            { id: 5, topic: "Pecahan Pembilang Satu", q: "Manakah tanda yang tepat untuk membandingkan: 1/3 ... 1/5", options: [">", "<", "=", "+"], answer: 0, explanation: "Penyebut 3 lebih kecil dari 5, sehingga bagian 1/3 lebih besar daripada 1/5. Tanda yang tepat adalah >." },
+            { id: 6, topic: "Pecahan Pembilang Satu", q: "Ibu memotong pizza menjadi 3 bagian sama besar. Ani mengambil 1 bagian. Berapa bagian pizza yang diambil Ani?", options: ["1/2", "1/3", "1/4", "3/1"], answer: 1, explanation: "Ani mengambil 1 bagian dari total 3 potongan, maka bernilai 1/3." },
+            { id: 7, topic: "Pecahan Pembilang Satu", q: "Urutkan pecahan berikut dari yang terkecil: 1/4, 1/2, 1/8", options: ["1/2, 1/4, 1/8", "1/8, 1/4, 1/2", "1/4, 1/8, 1/2", "1/8, 1/2, 1/4"], answer: 1, explanation: "Penyebut terbesar memiliki nilai terkecil. Urutan dari terkecil adalah 1/8, 1/4, lalu 1/2." },
+            { id: 8, topic: "Pecahan Pembilang Satu", q: "Manakah pernyataan yang BENAR di bawah ini?", options: ["1/5 > 1/2", "1/7 < 1/3", "1/10 > 1/4", "1/3 < 1/6"], answer: 1, explanation: "1/7 lebih kecil dari 1/3 karena penyebut 7 lebih besar dari penyebut 3." },
+            { id: 9, topic: "Pecahan Pembilang Satu", q: "Pecahan 'satu persepuluh' dituliskan dalam bentuk angka menjadi...", options: ["10/1", "1/10", "0/10", "1/100"], answer: 1, explanation: "Satu persepuluh ditulis dengan pembilang 1 dan penyebut 10, yaitu 1/10." },
+            { id: 10, topic: "Pecahan Pembilang Satu", q: "Tanda perbandingan yang tepat untuk 1/9 ... 1/7 adalah...", options: [">", "<", "=", "≥"], answer: 1, explanation: "1/9 lebih kecil dari 1/7 (1/9 < 1/7) karena membagi 1 menjadi 9 bagian menghasilkan potongan yang lebih kecil dibanding membaginya menjadi 7." },
+            { id: 11, topic: "Pecahan Pembilang Satu", q: "Budi memotong tali menjadi 5 bagian sama panjang. Satu potong tali bernilai...", options: ["1/5", "5/1", "1/2", "5/5"], answer: 0, explanation: "1 bagian dari 5 potong tali bernilai 1/5." },
+            { id: 12, topic: "Pecahan Pembilang Satu", q: "Manakah pecahan yang nilainya PALING KECIL?", options: ["1/3", "1/5", "1/7", "1/12"], answer: 3, explanation: "Penyebut 12 adalah yang terbesar, sehingga 1/12 memiliki potongan/nilai paling kecil." },
+            { id: 13, topic: "Pecahan Pembilang Satu", q: "Satu per seratus jika ditulis dalam bentuk pecahan biasa adalah...", options: ["1/10", "1/100", "100/1", "1/1000"], answer: 1, explanation: "Satu per seratus = 1/100." },
+            { id: 14, topic: "Pecahan Pembilang Satu", q: "Siti memiliki cokelat dan membaginya menjadi 10 potong sama besar. Ia makan 1 potong. Bagian yang dimakan Siti adalah...", options: ["1/10", "1/2", "10/1", "1/5"], answer: 0, explanation: "Siti makan 1 dari 10 bagian = 1/10." },
+            { id: 15, topic: "Pecahan Pembilang Satu", q: "Isilah titik-titik dengan tanda yang benar: 1/6 ... 1/6", options: [">", "<", "=", "≠"], answer: 2, explanation: "Kedua pecahan bernilai sama, jadi menggunakan tanda sama dengan (=)." },
+            { id: 16, topic: "Pecahan Pembilang Satu", q: "Urutan pecahan pembilang satu dari yang TERBESAR: 1/9, 1/3, 1/6 adalah...", options: ["1/3, 1/6, 1/9", "1/9, 1/6, 1/3", "1/6, 1/3, 1/9", "1/3, 1/9, 1/6"], answer: 0, explanation: "Dari yang terbesar: penyebut terkecil dulu (1/3), lalu (1/6), lalu penyebut terbesar (1/9)." },
+            { id: 17, topic: "Pecahan Pembilang Satu", q: "Sebuah kertas lipat dilipat menjadi 2 bagian sama besar. Nilai satu bagian adalah...", options: ["1/3", "1/2", "2/1", "1/4"], answer: 1, explanation: "1 dari 2 bagian lipatan bernilai 1/2 (setengah)." },
+            { id: 18, topic: "Pecahan Pembilang Satu", q: "Pecahan pembilang satu selalu memiliki angka ... di posisi atas.", options: ["0", "1", "2", "10"], answer: 1, explanation: "Ciri utama pecahan pembilang satu adalah angka pada pembilang (atas) adalah 1." },
+            { id: 19, topic: "Pecahan Pembilang Satu", q: "Antara 1/15 dan 1/12, pecahan yang lebih besar adalah...", options: ["1/15", "1/12", "Sama besar", "Tidak bisa dibandingkan"], answer: 1, explanation: "1/12 lebih besar dari 1/15 karena penyebut 12 lebih kecil daripada 15." },
+            { id: 20, topic: "Pecahan Pembilang Satu", q: "Sebuah donat dipotong menjadi 8 bagian sama rata. Doni memakan 1 bagian. Pecahan untuk bagian donat Doni adalah...", options: ["1/8", "1/4", "8/1", "1/2"], answer: 0, explanation: "1 potong dari 8 bagian = 1/8." },
+
+            // --- BAB 2: PECAHAN PENYEBUT SAMA (21 - 40) ---
+            { id: 21, topic: "Pecahan Penyebut Sama", q: "Hasil dari 2/7 + 3/7 adalah...", options: ["5/14", "5/7", "6/7", "1/7"], answer: 1, explanation: "Karena penyebutnya sudah sama (7), kita cukup menjumlahkan pembilangnya: 2 + 3 = 5, jadi 5/7." },
+            { id: 22, topic: "Pecahan Penyebut Sama", q: "Hasil pengurangan dari 8/10 - 3/10 adalah...", options: ["5/10", "5/0", "11/10", "5/20"], answer: 0, explanation: "Penyebut tetap 10, kurangkan pembilangnya: 8 - 3 = 5. Hasilnya 5/10." },
+            { id: 23, topic: "Pecahan Penyebut Sama", q: "Bandingkan pecahan berikut: 4/9 ... 7/9", options: [">", "<", "=", "+"], answer: 1, explanation: "Jika penyebutnya sama, pecahan dengan pembilang lebih kecil bernilai lebih kecil. 4/9 < 7/9." },
+            { id: 24, topic: "Pecahan Penyebut Sama", q: "Lani mempunyai 2/5 meter pita, lalu membeli lagi 1/5 meter. Panjang seluruh pita Lani adalah...", options: ["3/10 meter", "3/5 meter", "1/5 meter", "2/5 meter"], answer: 1, explanation: "2/5 + 1/5 = (2+1)/5 = 3/5 meter." },
+            { id: 25, topic: "Pecahan Penyebut Sama", q: "Urutkan pecahan berikut dari yang TERKECIL: 5/8, 2/8, 7/8", options: ["7/8, 5/8, 2/8", "2/8, 5/8, 7/8", "5/8, 2/8, 7/8", "2/8, 7/8, 5/8"], answer: 1, explanation: "Dengan penyebut sama, lihat pembilangnya dari yang terkecil: 2, 5, lalu 7. Urutannya 2/8, 5/8, 7/8." },
+            { id: 26, topic: "Pecahan Penyebut Sama", q: "1 - 3/5 = ... (Petunjuk: 1 dapat diubah menjadi 5/5)", options: ["2/5", "3/5", "1/5", "4/5"], answer: 0, explanation: "Ubah 1 menjadi 5/5. Maka 5/5 - 3/5 = 2/5." },
+            { id: 27, topic: "Pecahan Penyebut Sama", q: "Hasil dari 1/6 + 2/6 + 2/6 adalah...", options: ["5/18", "5/6", "4/6", "3/6"], answer: 1, explanation: "Jumlahkan pembilang: 1 + 2 + 2 = 5. Penyebut tetap 6. Hasil = 5/6." },
+            { id: 28, topic: "Pecahan Penyebut Sama", q: "Edo mempunyai tepung 7/9 kg. Digunakan untuk membuat kue 4/9 kg. Sisa tepung Edo adalah...", options: ["3/9 kg", "11/9 kg", "3/0 kg", "2/9 kg"], answer: 0, explanation: "Sisa tepung = 7/9 - 4/9 = 3/9 kg." },
+            { id: 29, topic: "Pecahan Penyebut Sama", q: "Tanda perbandingan yang tepat untuk 6/12 ... 4/12 adalah...", options: [">", "<", "=", "≤"], answer: 0, explanation: "6 lebih besar dari 4, maka 6/12 > 4/12." },
+            { id: 30, topic: "Pecahan Penyebut Sama", q: "Manakah di bawah ini yang hasilnya sama dengan 6/8?", options: ["2/8 + 4/8", "1/8 + 2/8", "7/8 - 2/8", "3/8 + 4/8"], answer: 0, explanation: "2/8 + 4/8 = 6/8." },
+            { id: 31, topic: "Pecahan Penyebut Sama", q: "Ibu memotong semangka menjadi 10 bagian. Dayu makan 2/10 bagian dan Ayah makan 5/10 bagian. Jumlah semangka yang dimakan adalah...", options: ["7/20 bagian", "7/10 bagian", "3/10 bagian", "10/10 bagian"], answer: 1, explanation: "2/10 + 5/10 = 7/10 bagian." },
+            { id: 32, topic: "Pecahan Penyebut Sama", q: "Pecahan 9/15 dikurangi 4/15 menghasilkan...", options: ["5/15", "13/15", "5/0", "5/30"], answer: 0, explanation: "9/15 - 4/15 = 5/15." },
+            { id: 33, topic: "Pecahan Penyebut Sama", q: "Urutkan pecahan dari yang TERBESAR: 3/11, 9/11, 6/11", options: ["9/11, 6/11, 3/11", "3/11, 6/11, 9/11", "6/11, 9/11, 3/11", "9/11, 3/11, 6/11"], answer: 0, explanation: "Urutan dari pembilang terbesar: 9, 6, lalu 3 -> 9/11, 6/11, 3/11." },
+            { id: 34, topic: "Pecahan Penyebut Sama", q: "Isilah nilai x pada persamaan: x/8 + 2/8 = 7/8. Nilai x adalah...", options: ["4", "5", "6", "9"], answer: 1, explanation: "x + 2 = 7, maka x = 7 - 2 = 5." },
+            { id: 35, topic: "Pecahan Penyebut Sama", q: "Manakah pernyataan yang SALAH di bawah ini?", options: ["3/7 < 5/7", "8/9 > 4/9", "2/6 > 5/6", "1/4 < 3/4"], answer: 2, explanation: "2/6 seharusnya lebih kecil dari 5/6 (2/6 < 5/6), jadi pernyataan 2/6 > 5/6 adalah SALAH." },
+            { id: 36, topic: "Pecahan Penyebut Sama", q: "3/4 - 1/4 = ...", options: ["2/4", "4/4", "1/4", "2/0"], answer: 0, explanation: "3/4 - 1/4 = 2/4." },
+            { id: 37, topic: "Pecahan Penyebut Sama", q: "Titi mengecat 2/9 bagian pagar pagi hari dan 4/9 bagian sore hari. Total pagar yang sudah dicat adalah...", options: ["6/18 bagian", "6/9 bagian", "2/9 bagian", "8/9 bagian"], answer: 1, explanation: "2/9 + 4/9 = 6/9 bagian." },
+            { id: 38, topic: "Pecahan Penyebut Sama", q: "10/12 - 6/12 - 1/12 = ...", options: ["3/12", "5/12", "4/12", "3/0"], answer: 0, explanation: "10 - 6 - 1 = 3, maka hasilnya 3/12." },
+            { id: 39, topic: "Pecahan Penyebut Sama", q: "Nilai dari 4/10 + 4/10 adalah...", options: ["8/20", "8/10", "1/10", "4/10"], answer: 1, explanation: "4/10 + 4/10 = 8/10." },
+            { id: 40, topic: "Pecahan Penyebut Sama", q: "Berapa hasil dari 15/20 - 7/20?", options: ["8/20", "22/20", "8/0", "7/20"], answer: 0, explanation: "15/20 - 7/20 = 8/20." },
+
+            // --- BAB 3: PECAHAN SENILAI (41 - 60) ---
+            { id: 41, topic: "Pecahan Senilai", q: "Pecahan yang senilai dengan 1/2 adalah...", options: ["2/4", "2/3", "3/5", "1/4"], answer: 0, explanation: "1/2 jika pembilang dan penyebut dikali 2 menjadi (1×2)/(2×2) = 2/4." },
+            { id: 42, topic: "Pecahan Senilai", q: "Isilah titik-titik berikut agar senilai: 2/3 = .../6", options: ["3", "4", "5", "6"], answer: 1, explanation: "Penyebut 3 dikali 2 menjadi 6. Maka pembilang 2 juga dikali 2 menjadi 4." },
+            { id: 43, topic: "Pecahan Senilai", q: "Bentuk paling sederhana dari pecahan 4/8 adalah...", options: ["1/2", "2/3", "1/4", "3/4"], answer: 0, explanation: "Bagi pembilang dan penyebut dengan 4: (4÷4)/(8÷4) = 1/2." },
+            { id: 44, topic: "Pecahan Senilai", q: "Pecahan 3/5 senilai dengan...", options: ["6/10", "5/8", "9/12", "6/15"], answer: 0, explanation: "Kali 2 pada pembilang dan penyebut: (3×2)/(5×2) = 6/10." },
+            { id: 45, topic: "Pecahan Senilai", q: "Isilah titik-titik: 5/10 = 1/...", options: ["2", "3", "4", "5"], answer: 0, explanation: "Pembilang 5 dibagi 5 menjadi 1. Maka penyebut 10 dibagi 5 menjadi 2." },
+            { id: 46, topic: "Pecahan Senilai", q: "Manakah pasangan pecahan yang SENILAI di bawah ini?", options: ["1/3 dan 3/9", "2/5 dan 4/8", "3/4 dan 6/10", "1/2 dan 2/6"], answer: 0, explanation: "1/3 jika dikali 3/3 menghasilkan 3/9. Jadi 1/3 senilai dengan 3/9." },
+            { id: 47, topic: "Pecahan Senilai", q: "Bentuk sederhana dari 6/9 adalah...", options: ["2/3", "1/3", "3/4", "2/4"], answer: 0, explanation: "Bagi pembilang dan penyebut dengan 3: (6÷3)/(9÷3) = 2/3." },
+            { id: 48, topic: "Pecahan Senilai", q: "Tentukan nilai n pada persamaan: 3/4 = n/12", options: ["6", "8", "9", "10"], answer: 2, explanation: "Penyebut 4 × 3 = 12. Maka n = 3 × 3 = 9." },
+            { id: 49, topic: "Pecahan Senilai", q: "Pecahan 8/12 jika disederhanakan dengan membagi 4 menjadi...", options: ["2/3", "4/6", "1/3", "2/4"], answer: 0, explanation: "(8÷4)/(12÷4) = 2/3." },
+            { id: 50, topic: "Pecahan Senilai", q: "Manakah pecahan di bawah ini yang TIDAK senilai dengan 1/4?", options: ["2/8", "3/12", "4/16", "5/15"], answer: 3, explanation: "5/15 jika disederhanakan bernilai 1/3, bukan 1/4." },
+            { id: 51, topic: "Pecahan Senilai", q: "Tentukan pecahan yang senilai dengan 2/7!", options: ["4/14", "4/7", "2/14", "6/14"], answer: 0, explanation: "(2×2)/(7×2) = 4/14." },
+            { id: 52, topic: "Pecahan Senilai", q: "Isilah angka yang kosong: .../5 = 8/20", options: ["1", "2", "3", "4"], answer: 1, explanation: "Penyebut 20 ÷ 4 = 5. Maka pembilang 8 ÷ 4 = 2." },
+            { id: 53, topic: "Pecahan Senilai", q: "Pecahan 10/20 sederhana nilainya sama dengan...", options: ["1/2", "1/4", "2/5", "3/4"], answer: 0, explanation: "10/20 ÷ 10/10 = 1/2." },
+            { id: 54, topic: "Pecahan Senilai", q: "Jika pembilang dan penyebut suatu pecahan dikalikan dengan bilangan yang sama (bukan nol), maka dihasilkan pecahan yang...", options: ["Lebih besar", "Lebih kecil", "Senilai", "Berbeda"], answer: 2, explanation: "Mengalikan atau membagi pembilang dan penyebut dengan angka yang sama menghasilkan pecahan senilai." },
+            { id: 55, topic: "Pecahan Senilai", q: "4/5 senilai dengan pecahan 12/x. Nilai x adalah...", options: ["13", "15", "20", "25"], answer: 1, explanation: "Pembilang 4 × 3 = 12. Penyebut x = 5 × 3 = 15." },
+            { id: 56, topic: "Pecahan Senilai", q: "Bentuk sederhana dari 15/20 adalah...", options: ["3/4", "3/5", "2/3", "4/5"], answer: 0, explanation: "Bagi dengan 5: (15÷5)/(20÷5) = 3/4." },
+            { id: 57, topic: "Pecahan Senilai", q: "Manakah pecahan yang senilai dengan 3/8?", options: ["6/16", "6/8", "9/16", "12/24"], answer: 0, explanation: "(3×2)/(8×2) = 6/16." },
+            { id: 58, topic: "Pecahan Senilai", q: "Pecahan 18/24 jika disederhanakan sampai paling sederhana menjadi...", options: ["3/4", "6/8", "9/12", "2/3"], answer: 0, explanation: "Bagi pembilang dan penyebut dengan FPB-nya yaitu 6: (18÷6)/(24÷6) = 3/4." },
+            { id: 59, topic: "Pecahan Senilai", q: "Isilah titik-titik: 7/10 = .../100", options: ["70", "17", "7", "700"], answer: 0, explanation: "Penyebut dikali 10 (10×10=100), pembilang dikali 10 (7×10=70). Jadi 70/100." },
+            { id: 60, topic: "Pecahan Senilai", q: "Pecahan 2/10 senilai dengan...", options: ["1/5", "1/10", "2/5", "4/10"], answer: 0, explanation: "2/10 disederhanakan dengan membagi 2 menjadi 1/5." },
+
+            // --- BAB 4: PECAHAN DESIMAL PERSEPULUHAN & PERSERATUSAN (61 - 80) ---
+            { id: 61, topic: "Pecahan Desimal", q: "Bentuk desimal dari pecahan 3/10 adalah...", options: ["0,3", "0,03", "3,0", "0,33"], answer: 0, explanation: "Penyebut 10 artinya ada 1 angka di belakang koma, yaitu 0,3." },
+            { id: 62, topic: "Pecahan Desimal", q: "Bentuk pecahan biasa dari desimal 0,7 adalah...", options: ["7/10", "7/100", "1/7", "7/1"], answer: 0, explanation: "1 angka di belakang koma (7) berarti persepuluhan = 7/10." },
+            { id: 63, topic: "Pecahan Desimal", q: "Bentuk desimal dari 25/100 adalah...", options: ["0,25", "2,5", "0,025", "25,0"], answer: 0, explanation: "Penyebut 100 artinya ada 2 angka di belakang koma, yaitu 0,25." },
+            { id: 64, topic: "Pecahan Desimal", q: "Angka 4 pada bilangan desimal 0,4 menduduki tempat...", options: ["Satuan", "Persepuluhan", "Perseratusan", "Ratusan"], answer: 1, explanation: "Satu angka tepat di belakang koma menduduki nilai tempat persepuluhan." },
+            { id: 65, topic: "Pecahan Desimal", q: "Bentuk desimal dari 8/100 adalah...", options: ["0,8", "0,08", "8,0", "0,88"], answer: 1, explanation: "Perseratusan membutuhkan 2 angka di belakang koma, maka ditulis 0,08." },
+            { id: 66, topic: "Pecahan Desimal", q: "Pecahan desimal 0,45 jika diubah ke pecahan biasa per seratus adalah...", options: ["45/10", "45/100", "4/5", "5/45"], answer: 1, explanation: "0,45 ada 2 angka di belakang koma, jadi bernilai 45/100." },
+            { id: 67, topic: "Pecahan Desimal", q: "Angka 9 pada bilangan desimal 0,09 menduduki nilai tempat...", options: ["Persepuluhan", "Perseratusan", "Satuan", "Ratusan"], answer: 1, explanation: "Angka kedua di belakang koma menduduki nilai tempat perseratusan." },
+            { id: 68, topic: "Pecahan Desimal", q: "Pecahan biasa 1/2 jika diubah ke bentuk desimal adalah... (Petunjuk: ubah ke persepuluhan)", options: ["0,2", "0,5", "0,12", "0,05"], answer: 1, explanation: "1/2 = 5/10 = 0,5." },
+            { id: 69, topic: "Pecahan Desimal", q: "Bentuk desimal dari 1/4 adalah... (Petunjuk: ubah ke perseratusan)", options: ["0,14", "0,25", "0,4", "0,75"], answer: 1, explanation: "1/4 = 25/100 = 0,25." },
+            { id: 70, topic: "Pecahan Desimal", q: "Manakah yang nilainya PALING BESAR di antara desimal berikut?", options: ["0,2", "0,5", "0,15", "0,09"], answer: 1, explanation: "Bandingkan angka persepuluhannya: 0,5 (nilai persepuluhan 5) adalah yang terbesar." },
+            { id: 71, topic: "Pecahan Desimal", q: "Hasil dari 0,3 + 0,4 adalah...", options: ["0,7", "0,12", "7,0", "0,07"], answer: 0, explanation: "3/10 + 4/10 = 7/10 = 0,7." },
+            { id: 72, topic: "Pecahan Desimal", q: "Bentuk desimal dari 6/10 adalah...", options: ["0,6", "0,06", "6,0", "0,16"], answer: 0, explanation: "6/10 = 0,6." },
+            { id: 73, topic: "Pecahan Desimal", q: "0,8 - 0,3 = ...", options: ["0,5", "0,11", "0,05", "1,1"], answer: 0, explanation: "8/10 - 3/10 = 5/10 = 0,5." },
+            { id: 74, topic: "Pecahan Desimal", q: "Pecahan biasa 3/4 dalam bentuk desimal adalah...", options: ["0,34", "0,75", "0,3", "0,4"], answer: 1, explanation: "3/4 = (3×25)/(4×25) = 75/100 = 0,75." },
+            { id: 75, topic: "Pecahan Desimal", q: "Bentuk desimal dari 12/100 adalah...", options: ["0,12", "1,2", "0,012", "12,0"], answer: 0, explanation: "12/100 = 0,12." },
+            { id: 76, topic: "Pecahan Desimal", q: "Tanda perbandingan yang tepat untuk 0,4 ... 0,25 adalah...", options: [">", "<", "=", "≤"], answer: 0, explanation: "0,4 sama dengan 0,40. Karena 40 per seratus lebih besar dari 25 per seratus, maka 0,4 > 0,25." },
+            { id: 77, topic: "Pecahan Desimal", q: "Bentuk biasa dari 0,05 adalah...", options: ["5/10", "5/100", "50/100", "1/5"], answer: 1, explanation: "Ada 2 angka di belakang koma, jadi 5/100." },
+            { id: 78, topic: "Pecahan Desimal", q: "0,50 nilainya sama dengan desimal...", options: ["0,5", "0,05", "5,0", "0,005"], answer: 0, explanation: "Nol di paling belakang angka desimal tidak mengubah nilai, jadi 0,50 = 0,5." },
+            { id: 79, topic: "Pecahan Desimal", q: "Bentuk desimal dari 9/10 adalah...", options: ["0,9", "0,09", "9,0", "0,99"], answer: 0, explanation: "9/10 = 0,9." },
+            { id: 80, topic: "Pecahan Desimal", q: "Urutkan desimal dari yang TERKECIL: 0,7 ; 0,2 ; 0,4", options: ["0,2 ; 0,4 ; 0,7", "0,7 ; 0,4 ; 0,2", "0,4 ; 0,2 ; 0,7", "0,2 ; 0,7 ; 0,4"], answer: 0, explanation: "Urutan dari persepuluhan terkecil: 0,2 lalu 0,4 lalu 0,7." },
+
+            // --- BAB 5: DESIMAL PERSERATUSAN & KONSEP PERSEN (81 - 100) ---
+            { id: 81, topic: "Perseratusan & Persen", q: "Persen adalah pecahan perseratus dengan lambang...", options: ["%", "‰", "#", "$"], answer: 0, explanation: "Lambang untuk persen adalah %." },
+            { id: 82, topic: "Perseratusan & Persen", q: "Bentuk persen dari 25/100 adalah...", options: ["2,5%", "25%", "0,25%", "250%"], answer: 1, explanation: "Pecahan perseratus langsung menunjukkan angka persennya. 25/100 = 25%." },
+            { id: 83, topic: "Perseratusan & Persen", q: "Bentuk desimal dari 50% adalah...", options: ["0,50", "5,0", "0,05", "50,0"], answer: 0, explanation: "50% = 50/100 = 0,50 (atau 0,5)." },
+            { id: 84, topic: "Perseratusan & Persen", q: "Pecahan desimal 0,10 jika diubah ke bentuk persen menjadi...", options: ["1%", "10%", "100%", "0,1%"], answer: 1, explanation: "0,10 = 10/100 = 10%." },
+            { id: 85, topic: "Perseratusan & Persen", q: "Bentuk persen dari 75/100 adalah...", options: ["7,5%", "75%", "0,75%", "750%"], answer: 1, explanation: "75/100 = 75%." },
+            { id: 86, topic: "Perseratusan & Persen", q: "0,40 sama nilainya dengan...", options: ["4%", "40%", "400%", "0,4%"], answer: 1, explanation: "0,40 = 40/100 = 40%." },
+            { id: 87, topic: "Perseratusan & Persen", q: "Bentuk persen dari pecahan 1/2 adalah...", options: ["20%", "50%", "10%", "100%"], answer: 1, explanation: "1/2 = 50/100 = 50%." },
+            { id: 88, topic: "Perseratusan & Persen", q: "Lambang 15% jika ditulis dalam pecahan perseratus adalah...", options: ["15/10", "15/100", "1/15", "100/15"], answer: 1, explanation: "Persen artinya per seratus, maka 15% = 15/100." },
+            { id: 89, topic: "Perseratusan & Persen", q: "Bentuk desimal dari 5% adalah...", options: ["0,5", "0,05", "5,0", "0,55"], answer: 1, explanation: "5% = 5/100 = 0,05." },
+            { id: 90, topic: "Perseratusan & Persen", q: "Diskon sebuah baju adalah 30%. Nilai 30% ini senilai dengan desimal...", options: ["0,30", "0,03", "3,0", "0,33"], answer: 0, explanation: "30% = 30/100 = 0,30." },
+            { id: 91, topic: "Perseratusan & Persen", q: "Bentuk persen dari pecahan 1/4 adalah...", options: ["14%", "25%", "40%", "50%"], answer: 1, explanation: "1/4 = 25/100 = 25%." },
+            { id: 92, topic: "Perseratusan & Persen", q: "Pecahan desimal 0,85 jika diubah ke bentuk persen adalah...", options: ["8,5%", "85%", "0,85%", "850%"], answer: 1, explanation: "0,85 = 85/100 = 85%." },
+            { id: 93, topic: "Perseratusan & Persen", q: "Sebanyak 100 orang siswa diwawancarai, 60 siswa menyukai bola. Persentase siswa menyukai bola adalah...", options: ["6%", "60%", "0,6%", "600%"], answer: 1, explanation: "60 dari 100 siswa = 60/100 = 60%." },
+            { id: 94, topic: "Perseratusan & Persen", q: "Bentuk pecahan biasa paling sederhana dari 50% adalah...", options: ["1/2", "1/4", "5/10", "2/4"], answer: 0, explanation: "50% = 50/100 = 1/2." },
+            { id: 95, topic: "Perseratusan & Persen", q: "Bentuk persen dari 0,02 adalah...", options: ["2%", "20%", "0,2%", "200%"], answer: 0, explanation: "0,02 = 2/100 = 2%." },
+            { id: 96, topic: "Perseratusan & Persen", q: "Manakah hubungan yang BENAR di bawah ini?", options: ["0,2 = 20%", "0,5 = 5%", "0,07 = 70%", "0,9 = 9%"], answer: 0, explanation: "0,2 = 0,20 = 20/100 = 20%. Pernyataan ini benar." },
+            { id: 97, topic: "Perseratusan & Persen", q: "Bentuk desimal dari 100% adalah...", options: ["1,0", "10,0", "0,1", "100,0"], answer: 0, explanation: "100% = 100/100 = 1 (atau 1,0)." },
+            { id: 98, topic: "Perseratusan & Persen", q: "Bentuk persen dari pecahan 3/4 adalah...", options: ["34%", "75%", "30%", "40%"], answer: 1, explanation: "3/4 = 75/100 = 75%." },
+            { id: 99, topic: "Perseratusan & Persen", q: "Pecahan desimal 0,09 senilai dengan persen...", options: ["90%", "9%", "0,9%", "900%"], answer: 1, explanation: "0,09 = 9/100 = 9%." },
+            { id: 100, topic: "Perseratusan & Persen", q: "Ibu membeli kue, dan 100% kue tersebut utuh. Nilai 100% sama dengan angka bulat...", options: ["0", "1", "10", "100"], answer: 1, explanation: "100% = 100/100 = 1 utuh." }
+        ];
+
+        // Application State Variables
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let currentScore = 0;
+
+        // Start Quiz
+        function startQuiz() {
+            document.getElementById('start-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            document.getElementById('quiz-card').classList.add('flex');
+            currentQuestionIndex = 0;
+            renderQuestion();
+            renderGridModal();
+        }
+
+        // Render Current Question
+        function renderQuestion() {
+            const q = questionsData[currentQuestionIndex];
+            
+            // Update Badges & Progress Bar
+            document.getElementById('question-number-badge').innerText = `Soal ${currentQuestionIndex + 1} dari ${questionsData.length}`;
+            document.getElementById('topic-badge').innerText = q.topic;
+            
+            const progressPercent = Math.round(((currentQuestionIndex + 1) / questionsData.length) * 100);
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('progress-percent').innerText = `${progressPercent}% Selesai`;
+
+            // Set Question Text
+            document.getElementById('question-text').innerHTML = `<span class="font-heading text-sky-600 font-bold mr-2">${q.id}.</span> ${q.q}`;
+
+            // Render Options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            const hasAnswered = userAnswers[currentQuestionIndex] !== null;
+            const selectedOption = userAnswers[currentQuestionIndex];
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-2xl border-2 font-semibold flex items-center justify-between transition-all duration-200 text-sm md:text-base`;
+                
+                let btnStyle = "border-slate-200 bg-white hover:border-sky-300 hover:bg-sky-50/50 text-slate-700";
+                let badgeStyle = "bg-slate-100 text-slate-600";
+                let iconHtml = '';
+
+                if (hasAnswered) {
+                    if (idx === q.answer) {
+                        // Correct option
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+                        badgeStyle = "bg-emerald-500 text-white";
+                        iconHtml = '<i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>';
+                    } else if (idx === selectedOption) {
+                        // Wrong selected option
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-900 font-bold";
+                        badgeStyle = "bg-rose-500 text-white";
+                        iconHtml = '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>';
+                    } else {
+                        // Other unselected options
+                        btnStyle = "border-slate-100 bg-slate-50 text-slate-400 opacity-60";
+                    }
+                }
+
+                btn.className = `${btn.className} ${btnStyle}`;
+                btn.disabled = hasAnswered;
+                btn.onclick = () => selectAnswer(idx);
+
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-xl ${badgeStyle} flex items-center justify-center font-heading font-bold text-xs shrink-0">
+                            ${optionLabels[idx]}
+                        </span>
+                        <span>${opt}</span>
+                    </div>
+                    ${iconHtml}
+                `;
+
+                optionsContainer.appendChild(btn);
+            });
+
+            // Render Explanation Box
+            const expBox = document.getElementById('explanation-box');
+            if (hasAnswered) {
+                const isCorrect = selectedOption === q.answer;
+                expBox.classList.remove('hidden');
+                
+                if (isCorrect) {
+                    expBox.className = "rounded-2xl p-4 md:p-5 border-2 bg-emerald-50 border-emerald-200 text-emerald-900";
+                    document.getElementById('explanation-icon').innerHTML = '<i class="fa-solid fa-face-smile text-emerald-500"></i>';
+                    document.getElementById('explanation-title').innerText = "Hebat! Jawabanmu Benar 🎉";
+                    document.getElementById('explanation-title').className = "font-heading font-bold text-emerald-700 text-base md:text-lg";
+                } else {
+                    expBox.className = "rounded-2xl p-4 md:p-5 border-2 bg-rose-50 border-rose-200 text-rose-900";
+                    document.getElementById('explanation-icon').innerHTML = '<i class="fa-solid fa-face-sad-tear text-rose-500"></i>';
+                    document.getElementById('explanation-title').innerText = "Kurang Tepat, Cek Pembahasannya Ya!";
+                    document.getElementById('explanation-title').className = "font-heading font-bold text-rose-700 text-base md:text-lg";
+                }
+
+                document.getElementById('explanation-text').innerHTML = `<strong>Penjelasan:</strong> ${q.explanation}`;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Update Navigation Buttons
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+
+            if (currentQuestionIndex === questionsData.length - 1) {
+                document.getElementById('next-btn').classList.add('hidden');
+                document.getElementById('finish-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('finish-btn').classList.add('hidden');
+            }
+
+            // Update Live Score Display
+            calculateScore();
+            renderGridModal();
+        }
+
+        // Handle Answer Selection
+        function selectAnswer(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            renderQuestion();
+        }
+
+        // Calculate Score
+        function calculateScore() {
+            let correct = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correct++;
+                }
+            });
+            // Each question = 1 point (100 total)
+            currentScore = correct;
+            document.getElementById('score-display').innerText = currentScore;
+        }
+
+        // Navigation Functions
+        function nextQuestion() {
+            if (currentQuestionIndex < questionsData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function jumpToQuestion(index) {
+            currentQuestionIndex = index;
+            renderQuestion();
+            toggleGridModal(false);
+        }
+
+        // Quick Navigation Modal Toggle
+        function toggleGridModal(forceState = null) {
+            const modal = document.getElementById('grid-modal');
+            if (forceState !== null) {
+                if (forceState) modal.classList.remove('hidden');
+                else modal.classList.add('hidden');
+            } else {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Render Quick Navigation Grid
+        function renderGridModal() {
+            const gridContainer = document.getElementById('questions-grid');
+            gridContainer.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                const userAns = userAnswers[idx];
+                let bgStyle = "bg-slate-100 text-slate-600 hover:bg-slate-200";
+
+                if (userAns !== null) {
+                    if (userAns === q.answer) {
+                        bgStyle = "bg-emerald-500 text-white font-bold";
+                    } else {
+                        bgStyle = "bg-rose-500 text-white font-bold";
+                    }
+                }
+
+                if (idx === currentQuestionIndex) {
+                    bgStyle += " ring-4 ring-sky-200 font-bold border-2 border-sky-600";
+                }
+
+                btn.className = `w-9 h-9 rounded-xl flex items-center justify-center font-heading text-xs transition duration-150 ${bgStyle}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => jumpToQuestion(idx);
+
+                gridContainer.appendChild(btn);
+            });
+        }
+
+        // Finish Quiz & Show Score Result
+        function finishQuiz() {
+            calculateScore();
+
+            let correctCount = 0;
+            let wrongCount = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionsData[idx].answer) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            });
+
+            const totalScore = correctCount; // Max 100
+            const percentage = Math.round((correctCount / questionsData.length) * 100);
+
+            // Populate Results Modal Data
+            document.getElementById('final-score').innerText = totalScore;
+            document.getElementById('score-percentage').innerText = `${percentage}% Jawaban Benar`;
+            document.getElementById('correct-count').innerText = correctCount;
+            document.getElementById('wrong-count').innerText = wrongCount;
+
+            // Tailor Feedback Message based on Score
+            const badgeEl = document.getElementById('result-badge');
+            const titleEl = document.getElementById('result-title');
+            const subTitleEl = document.getElementById('result-subtitle');
+
+            if (totalScore >= 85) {
+                badgeEl.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner bg-amber-100 text-amber-500";
+                badgeEl.innerHTML = '<i class="fa-solid fa-trophy bounce-short"></i>';
+                titleEl.innerText = "Luar Biasa! Tiga Bintang ⭐⭐⭐";
+                subTitleEl.innerText = "Kamu sungguh luar biasa! Pemahaman Pecahan, Desimal & Persen kamu sangat sempurna!";
+            } else if (totalScore >= 70) {
+                badgeEl.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner bg-sky-100 text-sky-600";
+                badgeEl.innerHTML = '<i class="fa-solid fa-star text-sky-500"></i>';
+                titleEl.innerText = "Kerja Bagus! Dua Bintang ⭐⭐";
+                subTitleEl.innerText = "Hasil yang sangat baik! Kamu sudah menguasai sebagian besar soal.";
+            } else {
+                badgeEl.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 text-5xl shadow-inner bg-orange-100 text-orange-500";
+                badgeEl.innerHTML = '<i class="fa-solid fa-seedling text-orange-500"></i>';
+                titleEl.innerText = "Tetap Semangat! Satu Bintang ⭐";
+                subTitleEl.innerText = "Jangan berkecil hati ya! Mari pelajari lagi pembahasan tiap nomor dan coba kuis ini sekali lagi.";
+            }
+
+            // Switch Screen
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('flex');
+            document.getElementById('result-card').classList.remove('hidden');
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            userAnswers = new Array(questionsData.length).fill(null);
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            document.getElementById('score-display').innerText = "0";
+
+            document.getElementById('result-card').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            document.getElementById('quiz-card').classList.add('flex');
+
+            renderQuestion();
+            renderGridModal();
+        }
+    </script>
+</body>
+</html>
